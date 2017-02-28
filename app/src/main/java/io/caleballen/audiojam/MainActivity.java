@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
 
 import com.androidplot.xy.BarFormatter;
 import com.androidplot.xy.BoundaryMode;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private static final int BINARY_BUCKET_DISTANCE = 10;
     private static final double BINARY_FREQ_INCREMENT = BUCKET_SIZE * BINARY_BUCKET_DISTANCE;
-    private static final int FRAMES_THRESHOLD = 4;
+    private static final int FRAMES_THRESHOLD = 2;
     //    private static final int SAMPLERATE = 8000;
     private static final int CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
     private Queue<Long[]> times;
     private long iterations = 0;
 
+    private TextView txtMessage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         plot = (XYPlot) findViewById(R.id.plot);
+        txtMessage = (TextView) findViewById(R.id.txt_message);
+        txtMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtMessage.setText("");
+            }
+        });
 //        plot.setRangeBoundaries(0, 22000, BoundaryMode.GROW);
         plot.setRangeLowerBoundary(0, BoundaryMode.FIXED);
         plot.setRangeUpperBoundary(100, BoundaryMode.FIXED);
@@ -157,49 +168,61 @@ public class MainActivity extends AppCompatActivity {
                     if (median > avgAllFreqs) {
 //                        Timber.d("In loop");
 
-//                        double avgFreqDiff = 0;
-//                        for(int i = 0; i < 8; i++) {
-////                            Timber.d((BINARY_FREQ_INCREMENT / BUCKET_SIZE) + "");
-//
-//                            int low = lowBucket + (int) ((i * (BINARY_FREQ_INCREMENT * 2)) / BUCKET_SIZE);
-//                            int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
-//                            avgFreqDiff += Math.abs(freqAvgs[low] - freqAvgs[high]);
-//                        }
-//                        avgFreqDiff /= 8;
                         String binData = "";
 
-                        for(int i = 0; i < 8; i++) {
-//                            double lD = (i * (BINARY_FREQ_INCREMENT * 2)) / BUCKET_SIZE;
-//                            Timber.d("double: " + lD);
-//                            Timber.d("cast to int: " + (int) lD);
-//                            Timber.d((BINARY_FREQ_INCREMENT / BUCKET_SIZE) + "");
+                        for(int i = 0; i < 9; i++) {
+
                             int low = lowBucket + (int) ((i * (BINARY_FREQ_INCREMENT * 2)) / BUCKET_SIZE);
                             int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
-
-                            /*if (freqAvgs[low] > avgFreqDiff && freqAvgs[high] < avgFreqDiff) {
-//                                Timber.d("0");
-                                double l = freqAvgs[low];
-                                double h = freqAvgs[high];
-                                binData += "0";
-                            } else if (freqAvgs[low] < avgFreqDiff && freqAvgs[high] > avgFreqDiff) {
-//                                Timber.d("1");
-                                binData += "1";
-                            }*/
                             double l = freqAvgs[low];
                             double h = freqAvgs[high];
                             // avgFreqDiff / 6
-                            if (freqAvgs[low] - freqAvgs[high] >= 0) {
+                            if (freqAvgs[low] - freqAvgs[high] >= freqAvgs[high]) {
                                 binData += "0";
-                            } else if (freqAvgs[high] - freqAvgs[low] >= 0) {
+                            } else if (freqAvgs[high] - freqAvgs[low] >= freqAvgs[low]) {
                                 binData += "1";
                             }
                         }
-                        if (binData.length() >= 8) {
+                        if (binData.length() == 9) {
                             Timber.d(binData);
-                            int charCode = Integer.parseInt(binData, 2);
-                            String s = new Character((char) charCode).toString();
-                            Timber.d(s);
-//                            Timber.d(avgFreqDiff + "");
+                            char[] charArray = binData.toCharArray();
+                            //determine if byte even (to verify data integrity)
+                            int total = 0;
+                            for (int i = 0; i < charArray.length; i++) {
+                                char c = charArray[i];
+                                int bit = Integer.parseInt(String.valueOf(c));
+                                total += bit;
+                            }
+                            boolean even = false;
+                            if (total % 2 == 0) {
+                                even = true;
+                            }
+                            if (even) {
+                                binData = binData.substring(0, 8);
+                                Timber.d(binData);
+                                int charCode = Integer.parseInt(binData, 2);
+                                String s = new Character((char) charCode).toString();
+                                Timber.d(s);
+
+                                String prev = txtMessage.getText().toString();
+                                String next = "";
+                                if (prev.length() == 0) {
+                                    next = s;
+                                } else if (prev.charAt(prev.length() - 1) != s.charAt(0)) {
+                                    next = prev + s;
+                                }
+                                if (!next.equals("")) {
+                                    final String finalNext = next;
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            txtMessage.setText(finalNext);
+                                        }
+                                    });
+                                }
+                            }else{
+                                Timber.d("Rejected, uneven");
+                            }
                         }
                         //01100001
 
@@ -212,15 +235,14 @@ public class MainActivity extends AppCompatActivity {
 
                     long avgsTime = System.currentTimeMillis();
 
-
 //                    LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null);
-                    BarFormatter bf = new BarFormatter(Color.CYAN, Color.CYAN);
+                    /*BarFormatter bf = new BarFormatter(Color.CYAN, Color.CYAN);
 
                     XYSeries series = new SimpleXYSeries(Arrays.asList(freqAvgs), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
 //                    XYSeries series = new SimpleXYSeries(Arrays.asList(dData), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
                     plot.clear();
                     plot.addSeries(series, bf);
-                    plot.redraw();
+                    plot.redraw();*/
 
                     long drawTime = System.currentTimeMillis();
 

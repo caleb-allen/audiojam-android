@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
+    android:orientation="vertical"
+    android:background="@color/ap_black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     tools:context="io.caleballen.audiojam.MainActivity">
 
     <TextView
+        android:id="@+id/txt_message"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:textColor="@color/ap_white"
+        android:text="" />
 
     <com.androidplot.xy.XYPlot
         style="@style/APDefacto.Dark"
@@ -22,4 +27,4 @@
         tools:domainTitle="domain"
         tools:lineLabels="left|bottom"
         tools:lineLabelRotationBottom="-45"/>
-</RelativeLayout>
+</LinearLayout>
