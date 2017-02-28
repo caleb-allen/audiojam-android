@@ -19,6 +19,7 @@ import com.androidplot.xy.XYSeries;
 
 import org.jtransforms.fft.DoubleFFT_1D;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -29,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int SAMPLERATE = 44100;
     private static final int BUCKETS = 1024;
+    private static final int LOW_FREQ = 18000;
+    private static final int BINARY_FREQ_INCREMENT = 250;
+    //width of each bucket in terms of frequency (~21.5332 Hz)
+    private static final double BUCKET_SIZE = (((float)SAMPLERATE / 2) / (float)BUCKETS);
     private static final int FRAMES_THRESHOLD = 4;
     //    private static final int SAMPLERATE = 8000;
     private static final int CHANNELS = AudioFormat.CHANNEL_IN_MONO;
@@ -40,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private short buffer[] = new short[BUCKETS];
     private Queue<Double[]> bufferFrames;
     private Double[] averages;
+    private Queue<Long[]> times;
+    private long iterations = 0;
 
 
     @Override
@@ -75,10 +82,14 @@ public class MainActivity extends AppCompatActivity {
         recorder.startRecording();
         recording = true;
 
+        times = new LinkedBlockingQueue<>();
+
         recordingThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (recording) {
+                    iterations++;
+                    long start = System.currentTimeMillis();
                     recorder.read(buffer, 0, BUCKETS);
                     DoubleFFT_1D fft = new DoubleFFT_1D(BUCKETS);
                     double[] data = new double[buffer.length];
@@ -86,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         data[i] = (double) buffer[i];
                     }
                     fft.realForward(data);
-
+                    long fftTime = System.currentTimeMillis();
                     Double[] dData = new Double[data.length];
                     for (int i = 0; i < data.length; i++) {
                         dData[i] = Math.abs(data[i]);
@@ -97,13 +108,14 @@ public class MainActivity extends AppCompatActivity {
 //                    for (int i = 0; i < data.length / 2; i++) {
 //                        dData[i] = data[i + (data.length / 2)];
 //                    }
-
+                    // remove frames from buffer
                     if (bufferFrames.size() >= FRAMES_THRESHOLD) {
                         Double[] frameToRemove = bufferFrames.poll();
                         for (int i = 0; i < averages.length; i++) {
                             averages[i] -= frameToRemove[i];
                         }
                     }
+                    // add frame to buffer
                     if (bufferFrames.size() < FRAMES_THRESHOLD) {
                         bufferFrames.add(dData);
                         for (int i = 0; i < averages.length; i++) {
@@ -111,24 +123,117 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    Double[] calcAverages = new Double[BUCKETS];
-                    for (int i = 0; i < calcAverages.length; i++) {
-                        calcAverages[i] = averages[i] / averages.length;
+                    Double[] freqAvgs = new Double[BUCKETS];
+
+                    for (int i = 0; i < freqAvgs.length; i++) {
+                        freqAvgs[i] = averages[i] / averages.length;
                     }
+
+                    //grab high frequencies and find median
+                    int lowBucket = (int) (LOW_FREQ / BUCKET_SIZE);
+                    Double[] highFreqs = Arrays.copyOfRange(freqAvgs, lowBucket, freqAvgs.length - 1);
+                    Double[] sorted = highFreqs.clone();
+                    Arrays.sort(sorted);
+                    //median of high frequencies
+                    double median = (sorted[sorted.length / 2] + sorted[(sorted.length / 2) + 1]) / 2;
+
+                    double avgAllFreqs = 0;
+                    for (Double d : freqAvgs) {
+                        avgAllFreqs += d;
+                    }
+                    avgAllFreqs /= freqAvgs.length;
+
+
+
+//                    Timber.d(median + "");
+                    if (median > avgAllFreqs) {
+                        double avgHighFreqs = 0;
+                        for(int i = 0; i < 8; i++) {
+//                            Timber.d((BINARY_FREQ_INCREMENT / BUCKET_SIZE) + "");
+                            int low = lowBucket + (int) ((i * 500) / BUCKET_SIZE);
+                            int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
+                            avgHighFreqs += freqAvgs[low];
+                            avgHighFreqs += freqAvgs[high];
+                        }
+                        avgHighFreqs /= 16;
+                        String binData = "";
+
+                        for(int i = 0; i < 8; i++) {
+//                            Timber.d((BINARY_FREQ_INCREMENT / BUCKET_SIZE) + "");
+                            int low = lowBucket + (int) ((i * 500) / BUCKET_SIZE);
+                            int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
+
+                            if (freqAvgs[low] > avgHighFreqs && freqAvgs[high] < avgHighFreqs) {
+//                                Timber.d("0");
+                                double l = freqAvgs[low];
+                                double h = freqAvgs[high];
+                                binData += "0";
+                            } else if (freqAvgs[low] < avgHighFreqs && freqAvgs[high] > avgHighFreqs) {
+//                                Timber.d("1");
+                                binData += "1";
+                            }
+                        }
+                        if (binData.length() >= 7) {
+                            Timber.d(binData);
+                        }
+                        //1100001
+
+//                        if (freqAvgs[lowBucket] > median && freqAvgs[lowBucket + (int)(BINARY_FREQ_INCREMENT / BUCKET_SIZE)] < median) {
+//                            Timber.d("0");
+//                        } else if (freqAvgs[lowBucket] < median && freqAvgs[lowBucket + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE)] > median) {
+//                            Timber.d("1");
+//                        }
+                    }
+
+                    long avgsTime = System.currentTimeMillis();
+
 
 //                    LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null);
                     BarFormatter bf = new BarFormatter(Color.CYAN, Color.CYAN);
 
-                    XYSeries series = new SimpleXYSeries(Arrays.asList(calcAverages), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
+                    XYSeries series = new SimpleXYSeries(Arrays.asList(freqAvgs), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
 //                    XYSeries series = new SimpleXYSeries(Arrays.asList(dData), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
                     plot.clear();
                     plot.addSeries(series, bf);
                     plot.redraw();
-                    try {
-                        Thread.sleep(33);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+
+                    long drawTime = System.currentTimeMillis();
+
+                    Long[] ts = {
+                            fftTime - start,
+                            avgsTime - fftTime,
+                            drawTime - avgsTime
+                    };
+                    times.add(ts);
+
+                    while (times.size() > 50) {
+                        times.poll();
                     }
+
+                    if (iterations % 50 == 0) {
+                        long avgFft = 0;
+                        long avgAvg = 0;
+                        long avgDraw = 0;
+                        for (Long[] timeFrame : times) {
+                            avgFft += timeFrame[0];
+                            avgAvg += timeFrame[1];
+                            avgDraw += timeFrame[2];
+                        }
+                        avgFft /= times.size();
+                        avgAvg /= times.size();
+                        avgDraw /= times.size();
+                        String s = String.format("FFT: %s\nBuffer: %s\nGraph: %s",
+                                avgFft,
+                                avgAvg,
+                                avgDraw);
+                        Timber.d(s);
+
+                    }
+//                    try {
+//                        Thread.sleep(33);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
                 }
             }
         });
