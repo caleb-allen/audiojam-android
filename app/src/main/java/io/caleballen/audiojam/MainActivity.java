@@ -29,10 +29,19 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int SAMPLERATE = 44100;
     private static final int BUCKETS = 1024;
-    private static final int LOW_FREQ = 18000;
-    private static final int BINARY_FREQ_INCREMENT = 250;
+    private static final int LOW_FREQ = 18100;
     //width of each bucket in terms of frequency (~21.5332 Hz)
     private static final double BUCKET_SIZE = (((float)SAMPLERATE / 2) / (float)BUCKETS);
+    //    private static final int LOW_FREQ = 17990;
+    //01100001
+    /**
+     * how far apart is each bit in terms of buckets?
+     * if BUCKETS is 512, this value should be 5
+     * if BUCKETS is 1024, this value should be 10
+     * etc
+     */
+    private static final int BINARY_BUCKET_DISTANCE = 10;
+    private static final double BINARY_FREQ_INCREMENT = BUCKET_SIZE * BINARY_BUCKET_DISTANCE;
     private static final int FRAMES_THRESHOLD = 4;
     //    private static final int SAMPLERATE = 8000;
     private static final int CHANNELS = AudioFormat.CHANNEL_IN_MONO;
@@ -146,21 +155,25 @@ public class MainActivity extends AppCompatActivity {
 
 //                    Timber.d(median + "");
                     if (median > avgAllFreqs) {
-                        Timber.d("In loop");
+//                        Timber.d("In loop");
 
-                        double avgFreqDiff = 0;
-                        for(int i = 0; i < 8; i++) {
-//                            Timber.d((BINARY_FREQ_INCREMENT / BUCKET_SIZE) + "");
-                            int low = lowBucket + (int) ((i * 500) / BUCKET_SIZE);
-                            int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
-                            avgFreqDiff += Math.abs(freqAvgs[low] - freqAvgs[high]);
-                        }
-                        avgFreqDiff /= 8;
+//                        double avgFreqDiff = 0;
+//                        for(int i = 0; i < 8; i++) {
+////                            Timber.d((BINARY_FREQ_INCREMENT / BUCKET_SIZE) + "");
+//
+//                            int low = lowBucket + (int) ((i * (BINARY_FREQ_INCREMENT * 2)) / BUCKET_SIZE);
+//                            int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
+//                            avgFreqDiff += Math.abs(freqAvgs[low] - freqAvgs[high]);
+//                        }
+//                        avgFreqDiff /= 8;
                         String binData = "";
 
                         for(int i = 0; i < 8; i++) {
+//                            double lD = (i * (BINARY_FREQ_INCREMENT * 2)) / BUCKET_SIZE;
+//                            Timber.d("double: " + lD);
+//                            Timber.d("cast to int: " + (int) lD);
 //                            Timber.d((BINARY_FREQ_INCREMENT / BUCKET_SIZE) + "");
-                            int low = lowBucket + (int) ((i * 500) / BUCKET_SIZE);
+                            int low = lowBucket + (int) ((i * (BINARY_FREQ_INCREMENT * 2)) / BUCKET_SIZE);
                             int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
 
                             /*if (freqAvgs[low] > avgFreqDiff && freqAvgs[high] < avgFreqDiff) {
@@ -172,18 +185,23 @@ public class MainActivity extends AppCompatActivity {
 //                                Timber.d("1");
                                 binData += "1";
                             }*/
-                            //avgFreqDiff / 2
+                            double l = freqAvgs[low];
+                            double h = freqAvgs[high];
+                            // avgFreqDiff / 6
                             if (freqAvgs[low] - freqAvgs[high] >= 0) {
                                 binData += "0";
                             } else if (freqAvgs[high] - freqAvgs[low] >= 0) {
                                 binData += "1";
-
                             }
                         }
-                        if (binData.length() >= 7) {
+                        if (binData.length() >= 8) {
                             Timber.d(binData);
+                            int charCode = Integer.parseInt(binData, 2);
+                            String s = new Character((char) charCode).toString();
+                            Timber.d(s);
+//                            Timber.d(avgFreqDiff + "");
                         }
-                        //1100001
+                        //01100001
 
 //                        if (freqAvgs[lowBucket] > median && freqAvgs[lowBucket + (int)(BINARY_FREQ_INCREMENT / BUCKET_SIZE)] < median) {
 //                            Timber.d("0");
