@@ -19,7 +19,6 @@ import com.androidplot.xy.XYSeries;
 
 import org.jtransforms.fft.DoubleFFT_1D;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -147,15 +146,16 @@ public class MainActivity extends AppCompatActivity {
 
 //                    Timber.d(median + "");
                     if (median > avgAllFreqs) {
-                        double avgHighFreqs = 0;
+                        Timber.d("In loop");
+
+                        double avgFreqDiff = 0;
                         for(int i = 0; i < 8; i++) {
 //                            Timber.d((BINARY_FREQ_INCREMENT / BUCKET_SIZE) + "");
                             int low = lowBucket + (int) ((i * 500) / BUCKET_SIZE);
                             int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
-                            avgHighFreqs += freqAvgs[low];
-                            avgHighFreqs += freqAvgs[high];
+                            avgFreqDiff += Math.abs(freqAvgs[low] - freqAvgs[high]);
                         }
-                        avgHighFreqs /= 16;
+                        avgFreqDiff /= 8;
                         String binData = "";
 
                         for(int i = 0; i < 8; i++) {
@@ -163,14 +163,21 @@ public class MainActivity extends AppCompatActivity {
                             int low = lowBucket + (int) ((i * 500) / BUCKET_SIZE);
                             int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
 
-                            if (freqAvgs[low] > avgHighFreqs && freqAvgs[high] < avgHighFreqs) {
+                            /*if (freqAvgs[low] > avgFreqDiff && freqAvgs[high] < avgFreqDiff) {
 //                                Timber.d("0");
                                 double l = freqAvgs[low];
                                 double h = freqAvgs[high];
                                 binData += "0";
-                            } else if (freqAvgs[low] < avgHighFreqs && freqAvgs[high] > avgHighFreqs) {
+                            } else if (freqAvgs[low] < avgFreqDiff && freqAvgs[high] > avgFreqDiff) {
 //                                Timber.d("1");
                                 binData += "1";
+                            }*/
+                            //avgFreqDiff / 2
+                            if (freqAvgs[low] - freqAvgs[high] >= 0) {
+                                binData += "0";
+                            } else if (freqAvgs[high] - freqAvgs[low] >= 0) {
+                                binData += "1";
+
                             }
                         }
                         if (binData.length() >= 7) {
