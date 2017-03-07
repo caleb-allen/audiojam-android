@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int BUCKETS = 1024;
     private static final int LOW_FREQ = 18100;
     //width of each bucket in terms of frequency (~21.5332 Hz)
-    private static final double BUCKET_SIZE = (((float)SAMPLERATE / 2) / (float)BUCKETS);
+    private static final double BUCKET_SIZE = (((float) SAMPLERATE / 2) / (float) BUCKETS);
     //    private static final int LOW_FREQ = 17990;
     //01100001
     /**
@@ -43,11 +43,14 @@ public class MainActivity extends AppCompatActivity {
      * etc
      */
     private static final int BINARY_BUCKET_DISTANCE = 10;
+    private static final int BYTES_PER_PACKET = 1;
+    private static final int BITS_PER_PACKET = (8 * BYTES_PER_PACKET) + 1;//plus checking bit
     private static final double BINARY_FREQ_INCREMENT = BUCKET_SIZE * BINARY_BUCKET_DISTANCE;
     private static final int FRAMES_THRESHOLD = 2;
     //    private static final int SAMPLERATE = 8000;
     private static final int CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
+    private static final boolean GRAPH_ENABLED = true;
     private AudioRecord recorder = null;
     private boolean recording = false;
     private Thread recordingThread = null;
@@ -163,14 +166,13 @@ public class MainActivity extends AppCompatActivity {
                     avgAllFreqs /= freqAvgs.length;
 
 
-
 //                    Timber.d(median + "");
-                    if (median > avgAllFreqs) {
+                    if (median > avgAllFreqs / 10) {
+//                    if (true) {
 //                        Timber.d("In loop");
 
                         String binData = "";
-
-                        for(int i = 0; i < 9; i++) {
+                        for (int i = 0; i < BITS_PER_PACKET; i++) {
 
                             int low = lowBucket + (int) ((i * (BINARY_FREQ_INCREMENT * 2)) / BUCKET_SIZE);
                             int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
@@ -183,7 +185,10 @@ public class MainActivity extends AppCompatActivity {
                                 binData += "1";
                             }
                         }
-                        if (binData.length() == 9) {
+//                        if (binData.length() >= 20) {
+//                            Timber.d(binData);
+//                        }
+                        if (binData.length() == BITS_PER_PACKET) {
                             Timber.d(binData);
                             char[] charArray = binData.toCharArray();
                             //determine if byte even (to verify data integrity)
@@ -198,18 +203,24 @@ public class MainActivity extends AppCompatActivity {
                                 even = true;
                             }
                             if (even) {
-                                binData = binData.substring(0, 8);
-                                Timber.d(binData);
-                                int charCode = Integer.parseInt(binData, 2);
-                                String s = new Character((char) charCode).toString();
-                                Timber.d(s);
-
+                                String packet = "";
+                                for (int i = 0; i < BYTES_PER_PACKET; i++) {
+                                    //p_data = data[byte * BYTES_PER_PACKET:((byte + 1) * BYTES_PER_PACKET)]
+                                    Timber.d(i * 8 + "");
+                                    Timber.d((i + 1) * 8 + "");
+                                    String subData = binData.substring(i * 8, (i + 1) * 8);
+                                    Timber.d(subData);
+                                    int charCode = Integer.parseInt(subData, 2);
+                                    String s = new Character((char) charCode).toString();
+                                    packet += s;
+                                }
+                                Timber.d(packet);
                                 String prev = txtMessage.getText().toString();
                                 String next = "";
                                 if (prev.length() == 0) {
-                                    next = s;
-                                } else if (prev.charAt(prev.length() - 1) != s.charAt(0)) {
-                                    next = prev + s;
+                                    next = packet;
+                                } else if (!prev.endsWith(packet)) {
+                                    next = prev + packet;
                                 }
                                 if (!next.equals("")) {
                                     final String finalNext = next;
@@ -220,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                     });
                                 }
-                            }else{
+                            } else {
                                 Timber.d("Rejected, uneven");
                             }
                         }
@@ -236,13 +247,15 @@ public class MainActivity extends AppCompatActivity {
                     long avgsTime = System.currentTimeMillis();
 
 //                    LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null);
-                    /*BarFormatter bf = new BarFormatter(Color.CYAN, Color.CYAN);
-
-                    XYSeries series = new SimpleXYSeries(Arrays.asList(freqAvgs), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
+                    if (GRAPH_ENABLED) {
+                        BarFormatter bf = new BarFormatter(Color.CYAN, Color.CYAN);
+                        XYSeries series = new SimpleXYSeries(Arrays.asList(freqAvgs), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
 //                    XYSeries series = new SimpleXYSeries(Arrays.asList(dData), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
-                    plot.clear();
-                    plot.addSeries(series, bf);
-                    plot.redraw();*/
+                        plot.clear();
+                        plot.addSeries(series, bf);
+                        plot.redraw();
+                    }
+
 
                     long drawTime = System.currentTimeMillis();
 
