@@ -21,16 +21,24 @@ import com.androidplot.xy.XYSeries;
 
 import org.jtransforms.fft.DoubleFFT_1D;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import io.caleballen.audiojam.util.Sample;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int SAMPLERATE = 44100;
     private static final int BUCKETS = 1024;
+    private static final String SYNC_MESSAGE = "abcde";
+//    private static final int PACKET_DURATION = 1000; // in milliseconds
+    private static final int PACKET_DURATION = 130; // in milliseconds
     private static final int LOW_FREQ = 18100;
     //width of each bucket in terms of frequency (~21.5332 Hz)
     private static final double BUCKET_SIZE = (((float) SAMPLERATE / 2) / (float) BUCKETS);
@@ -50,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     //    private static final int SAMPLERATE = 8000;
     private static final int CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
-    private static final boolean GRAPH_ENABLED = true;
+    private static final boolean GRAPH_ENABLED = false;
     private AudioRecord recorder = null;
     private boolean recording = false;
     private Thread recordingThread = null;
@@ -58,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
     private short buffer[] = new short[BUCKETS];
     private Queue<Double[]> bufferFrames;
     private Double[] averages;
-    private Queue<Long[]> times;
+    private Queue<Long[]> timings;
+    private List<Sample> samples;
     private long iterations = 0;
 
     private TextView txtMessage;
@@ -104,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
         recorder.startRecording();
         recording = true;
 
-        times = new LinkedBlockingQueue<>();
+        timings = new LinkedBlockingQueue<>();
+        samples = new ArrayList<>();
 
         recordingThread = new Thread(new Runnable() {
             @Override
@@ -125,11 +135,6 @@ public class MainActivity extends AppCompatActivity {
                         dData[i] = Math.abs(data[i]);
                     }
 
-                    //high pass filter
-//                    Double[] dData = new Double[data.length / 2];
-//                    for (int i = 0; i < data.length / 2; i++) {
-//                        dData[i] = data[i + (data.length / 2)];
-//                    }
                     // remove frames from buffer
                     if (bufferFrames.size() >= FRAMES_THRESHOLD) {
                         Double[] frameToRemove = bufferFrames.poll();
@@ -166,10 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     avgAllFreqs /= freqAvgs.length;
 
 
-//                    Timber.d(median + "");
                     if (median > avgAllFreqs / 10) {
-//                    if (true) {
-//                        Timber.d("In loop");
 
                         String binData = "";
                         for (int i = 0; i < BITS_PER_PACKET; i++) {
@@ -185,11 +187,9 @@ public class MainActivity extends AppCompatActivity {
                                 binData += "1";
                             }
                         }
-//                        if (binData.length() >= 20) {
-//                            Timber.d(binData);
-//                        }
+
                         if (binData.length() == BITS_PER_PACKET) {
-                            Timber.d(binData);
+//                            Timber.d(binData);
                             char[] charArray = binData.toCharArray();
                             //determine if byte even (to verify data integrity)
                             int total = 0;
@@ -203,18 +203,19 @@ public class MainActivity extends AppCompatActivity {
                                 even = true;
                             }
                             if (even) {
+                                // data is good
                                 String packet = "";
                                 for (int i = 0; i < BYTES_PER_PACKET; i++) {
-                                    //p_data = data[byte * BYTES_PER_PACKET:((byte + 1) * BYTES_PER_PACKET)]
-                                    Timber.d(i * 8 + "");
-                                    Timber.d((i + 1) * 8 + "");
+//                                    Timber.d(i * 8 + "");
+//                                    Timber.d((i + 1) * 8 + "");
                                     String subData = binData.substring(i * 8, (i + 1) * 8);
-                                    Timber.d(subData);
+//                                    Timber.d(subData);
                                     int charCode = Integer.parseInt(subData, 2);
-                                    String s = new Character((char) charCode).toString();
-                                    packet += s;
+                                    char c = (char) charCode;
+                                    packet += c;
+                                    samples.add(new Sample(c, System.currentTimeMillis()));
                                 }
-                                Timber.d(packet);
+//                                Timber.d(packet);
                                 String prev = txtMessage.getText().toString();
                                 String next = "";
                                 if (prev.length() == 0) {
@@ -231,26 +232,53 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                     });
                                 }
+
+                                if (next.equals(SYNC_MESSAGE) && samples != null && !samples.isEmpty()) {
+                                    Timber.d("Calculating start time...");
+                                    // go through samples and calculate start time
+                                    Map<Character, Integer> reductionValue = new HashMap<>();
+                                    char[] chars = SYNC_MESSAGE.toCharArray();
+                                    for (int i = 0; i < chars.length; i++) {
+                                        char c = chars[i];
+                                        reductionValue.put(c, i * PACKET_DURATION);
+                                    }
+
+                                    Timber.d("Reducing samples...");
+                                    for (Sample sample : samples) {
+                                        long time = sample.getTime();
+                                        int reduceBy = reductionValue.get(sample.getChar());
+                                        sample.setTime(time - reduceBy);
+                                    }
+
+                                    long low = samples.get(0).getTime();
+                                    long high = samples.get(0).getTime();
+
+                                    for (Sample sample : samples) {
+                                        if (sample.getTime() < low) {
+                                            low = sample.getTime();
+                                        }
+                                        if (sample.getTime() > high) {
+                                            high = sample.getTime();
+                                        }
+                                    }
+                                    Timber.d("High: " + high);
+                                    Timber.d("Low: " + low);
+                                    Timber.d("High - Low: " + (high - low));
+
+                                    samples.clear();
+                                }
+
                             } else {
                                 Timber.d("Rejected, uneven");
                             }
                         }
-                        //01100001
-
-//                        if (freqAvgs[lowBucket] > median && freqAvgs[lowBucket + (int)(BINARY_FREQ_INCREMENT / BUCKET_SIZE)] < median) {
-//                            Timber.d("0");
-//                        } else if (freqAvgs[lowBucket] < median && freqAvgs[lowBucket + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE)] > median) {
-//                            Timber.d("1");
-//                        }
                     }
 
                     long avgsTime = System.currentTimeMillis();
 
-//                    LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null);
                     if (GRAPH_ENABLED) {
                         BarFormatter bf = new BarFormatter(Color.CYAN, Color.CYAN);
                         XYSeries series = new SimpleXYSeries(Arrays.asList(freqAvgs), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
-//                    XYSeries series = new SimpleXYSeries(Arrays.asList(dData), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
                         plot.clear();
                         plot.addSeries(series, bf);
                         plot.redraw();
@@ -264,24 +292,24 @@ public class MainActivity extends AppCompatActivity {
                             avgsTime - fftTime,
                             drawTime - avgsTime
                     };
-                    times.add(ts);
+                    timings.add(ts);
 
-                    while (times.size() > 50) {
-                        times.poll();
+                    while (timings.size() > 50) {
+                        timings.poll();
                     }
 
-                    if (iterations % 50 == 0) {
+                    if (iterations % 100 == 0) {
                         long avgFft = 0;
                         long avgAvg = 0;
                         long avgDraw = 0;
-                        for (Long[] timeFrame : times) {
+                        for (Long[] timeFrame : timings) {
                             avgFft += timeFrame[0];
                             avgAvg += timeFrame[1];
                             avgDraw += timeFrame[2];
                         }
-                        avgFft /= times.size();
-                        avgAvg /= times.size();
-                        avgDraw /= times.size();
+                        avgFft /= timings.size();
+                        avgAvg /= timings.size();
+                        avgDraw /= timings.size();
                         String s = String.format("FFT: %s\nBuffer: %s\nGraph: %s",
                                 avgFft,
                                 avgAvg,
@@ -289,11 +317,6 @@ public class MainActivity extends AppCompatActivity {
                         Timber.d(s);
 
                     }
-//                    try {
-//                        Thread.sleep(33);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
                 }
             }
         });
