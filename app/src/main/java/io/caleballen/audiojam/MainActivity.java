@@ -3,6 +3,8 @@ package io.caleballen.audiojam;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.databinding.DataBindingUtil;
+import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -15,7 +17,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.TextView;
 
 import com.androidplot.xy.BarFormatter;
@@ -34,7 +35,9 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import io.caleballen.audiojam.databinding.ActivityMainBinding;
 import io.caleballen.audiojam.util.Sample;
+import io.caleballen.audiojam.util.Timing;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int SAMPLERATE = 44100;
     private static final int BUCKETS = 1024;
     private static final String SYNC_MESSAGE = "abcde";
-//    private static final int PACKET_DURATION = 1000; // in milliseconds
+    //    private static final int PACKET_DURATION = 1000; // in milliseconds
     private static final int PACKET_DURATION = 130; // in milliseconds
     private static final int LOW_FREQ = 18100;
     //width of each bucket in terms of frequency (~21.5332 Hz)
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     //    private static final int SAMPLERATE = 8000;
     private static final int CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
-    private static final boolean GRAPH_ENABLED = false;
+    public static boolean graphEnabled = false;
     private AudioRecord recorder = null;
     private boolean recording = false;
     private Thread recordingThread = null;
@@ -72,25 +75,19 @@ public class MainActivity extends AppCompatActivity {
     private Queue<Double[]> bufferFrames;
     private Double[] averages;
     private Queue<Long[]> timings;
+    private Timing timing;
     private List<Sample> samples;
     private long iterations = 0;
 
-    private TextView txtMessage;
-
+    public final ObservableField<String> text = new ObservableField<>("");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.setActivity(this);
         plot = (XYPlot) findViewById(R.id.plot);
-        txtMessage = (TextView) findViewById(R.id.txt_message);
-        txtMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtMessage.setText("");
-            }
-        });
+
 //        plot.setRangeBoundaries(0, 22000, BoundaryMode.GROW);
         plot.setRangeLowerBoundary(0, BoundaryMode.FIXED);
         plot.setRangeUpperBoundary(100, BoundaryMode.FIXED);
@@ -119,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
         recording = true;
 
         timings = new LinkedBlockingQueue<>();
+        timing = new Timing();
+        binding.setTime(timing);
         samples = new ArrayList<>();
 
         recordingThread = new Thread(new Runnable() {
@@ -127,231 +126,261 @@ public class MainActivity extends AppCompatActivity {
                 while (recording) {
                     iterations++;
                     long start = System.currentTimeMillis();
-                    recorder.read(buffer, 0, BUCKETS);
-                    DoubleFFT_1D fft = new DoubleFFT_1D(BUCKETS);
-                    double[] data = new double[buffer.length];
-                    for (int i = 0; i < buffer.length; i++) {
-                        data[i] = (double) buffer[i];
-                    }
-                    fft.realForward(data);
+                    double[] data = fft();
                     long fftTime = System.currentTimeMillis();
-                    Double[] dData = new Double[data.length];
-                    for (int i = 0; i < data.length; i++) {
-                        dData[i] = Math.abs(data[i]);
+                    Double[] freqAvgs = buffer(data);
+                    String next = fskDemodulation(freqAvgs);
+                    if (next != null) {
+                        text.set(next);
                     }
-
-                    // remove frames from buffer
-                    if (bufferFrames.size() >= FRAMES_THRESHOLD) {
-                        Double[] frameToRemove = bufferFrames.poll();
-                        for (int i = 0; i < averages.length; i++) {
-                            averages[i] -= frameToRemove[i];
-                        }
+                    if (next != null && next.equals(SYNC_MESSAGE) && samples != null && !samples.isEmpty()) {
+                        calculateStartTime();
+//                        setTorchEnabled(true);
                     }
-                    // add frame to buffer
-                    if (bufferFrames.size() < FRAMES_THRESHOLD) {
-                        bufferFrames.add(dData);
-                        for (int i = 0; i < averages.length; i++) {
-                            averages[i] += dData[i];
-                        }
+                    long avgsTime = System.currentTimeMillis();
+                    graphData(freqAvgs);
+
+                    long drawTime = System.currentTimeMillis();
+
+                    timing(start, fftTime, avgsTime, drawTime);
+                }
+            }
+        });
+        recordingThread.start();
+    }
+
+    private void graphData(Double[] freqAvgs) {
+        if (graphEnabled) {
+            BarFormatter bf = new BarFormatter(Color.CYAN, Color.CYAN);
+            XYSeries series = new SimpleXYSeries(Arrays.asList(freqAvgs), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
+            plot.clear();
+            plot.addSeries(series, bf);
+            plot.redraw();
+        } else {
+            plot.clear();
+        }
+    }
+
+    public void setGraphEnabled(boolean enabled) {
+        Timber.i("Graph method");
+        graphEnabled = enabled;
+    }
+
+    public void clearText() {
+        text.set("");
+    }
+
+    //--------torch--------------
+    private void setTorchEnabled(boolean enabled){
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            CameraManager camera = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+
+            try {
+                String[] cameraIds = camera.getCameraIdList();
+                ArrayList<String> flashIds = new ArrayList<>();
+                for (String cameraId : cameraIds) {
+                    Timber.i("Camera %s", cameraId);
+                    CameraCharacteristics characteristics = camera.getCameraCharacteristics(cameraId);
+                    Boolean flashAvailable = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
+                    if (flashAvailable != null && flashAvailable) {
+                        flashIds.add(cameraId);
                     }
+                }
 
-                    Double[] freqAvgs = new Double[BUCKETS];
+                for (String id : flashIds) {
+                    camera.setTorchMode(id, enabled);
+                }
 
-                    for (int i = 0; i < freqAvgs.length; i++) {
-                        freqAvgs[i] = averages[i] / averages.length;
-                    }
+            } catch (CameraAccessException e) {
+                e.printStackTrace();
+                //TODO error you need to close camera app
+            }
+        } else {
+            //TODO pre-marshmallow flash
+        }
+    }
 
-                    //grab high frequencies and find median
-                    int lowBucket = (int) (LOW_FREQ / BUCKET_SIZE);
-                    Double[] highFreqs = Arrays.copyOfRange(freqAvgs, lowBucket, freqAvgs.length - 1);
+    //--------audio processing------------
+
+    private double[] fft() {
+        recorder.read(buffer, 0, BUCKETS);
+        DoubleFFT_1D fft = new DoubleFFT_1D(BUCKETS);
+        double[] data = new double[buffer.length];
+        for (int i = 0; i < buffer.length; i++) {
+            data[i] = (double) buffer[i];
+        }
+        fft.realForward(data);
+        return data;
+    }
+
+    private Double[] buffer(double[] data) {
+        Double[] dData = new Double[data.length];
+        for (int i = 0; i < data.length; i++) {
+            dData[i] = Math.abs(data[i]);
+        }
+
+        // remove frames from buffer
+        if (bufferFrames.size() >= FRAMES_THRESHOLD) {
+            Double[] frameToRemove = bufferFrames.poll();
+            for (int i = 0; i < averages.length; i++) {
+                averages[i] -= frameToRemove[i];
+            }
+        }
+        // add frame to buffer
+        if (bufferFrames.size() < FRAMES_THRESHOLD) {
+            bufferFrames.add(dData);
+            for (int i = 0; i < averages.length; i++) {
+                averages[i] += dData[i];
+            }
+        }
+
+        Double[] freqAvgs = new Double[BUCKETS];
+
+        for (int i = 0; i < freqAvgs.length; i++) {
+            freqAvgs[i] = averages[i] / averages.length;
+        }
+
+        return freqAvgs;
+
+        //grab high frequencies and find median
+                    /*Double[] highFreqs = Arrays.copyOfRange(freqAvgs, lowBucket, freqAvgs.length - 1);
                     Double[] sorted = highFreqs.clone();
-                    Arrays.sort(sorted);
-                    //median of high frequencies
-                    double median = (sorted[sorted.length / 2] + sorted[(sorted.length / 2) + 1]) / 2;
+                    Arrays.sort(sorted);*/
+        //median of high frequencies
+                    /*double median = (sorted[sorted.length / 2] + sorted[(sorted.length / 2) + 1]) / 2;
 
                     double avgAllFreqs = 0;
                     for (Double d : freqAvgs) {
                         avgAllFreqs += d;
                     }
-                    avgAllFreqs /= freqAvgs.length;
+                    avgAllFreqs /= freqAvgs.length;*/
+    }
 
+    private String fskDemodulation(Double[] freqAvgs) {
+        int lowBucket = (int) (LOW_FREQ / BUCKET_SIZE);
+        String binData = "";
+        for (int i = 0; i < BITS_PER_PACKET; i++) {
 
-                    if (true) {
-
-                        String binData = "";
-                        for (int i = 0; i < BITS_PER_PACKET; i++) {
-
-                            int low = lowBucket + (int) ((i * (BINARY_FREQ_INCREMENT * 2)) / BUCKET_SIZE);
-                            int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
-                            double l = freqAvgs[low];
-                            double h = freqAvgs[high];
-                            // avgFreqDiff / 6
-                            if (freqAvgs[low] - freqAvgs[high] >= freqAvgs[high]) {
-                                binData += "0";
-                            } else if (freqAvgs[high] - freqAvgs[low] >= freqAvgs[low]) {
-                                binData += "1";
-                            }
-                        }
-
-                        if (binData.length() == BITS_PER_PACKET) {
-//                            Timber.i(binData);
-                            char[] charArray = binData.toCharArray();
-                            //determine if byte even (to verify data integrity)
-                            int total = 0;
-                            for (int i = 0; i < charArray.length; i++) {
-                                char c = charArray[i];
-                                int bit = Integer.parseInt(String.valueOf(c));
-                                total += bit;
-                            }
-                            boolean even = false;
-                            if (total % 2 == 0) {
-                                even = true;
-                            }
-                            if (even) {
-                                // data is good
-                                String packet = "";
-                                for (int i = 0; i < BYTES_PER_PACKET; i++) {
-//                                    Timber.i(i * 8 + "");
-//                                    Timber.i((i + 1) * 8 + "");
-                                    String subData = binData.substring(i * 8, (i + 1) * 8);
-//                                    Timber.i(subData);
-                                    int charCode = Integer.parseInt(subData, 2);
-                                    char c = (char) charCode;
-                                    packet += c;
-                                    samples.add(new Sample(c, System.currentTimeMillis()));
-                                }
-//                                Timber.i(packet);
-                                String prev = txtMessage.getText().toString();
-                                String next = "";
-                                if (prev.length() == 0) {
-                                    next = packet;
-                                } else if (!prev.endsWith(packet)) {
-                                    next = prev + packet;
-                                }
-                                if (!next.equals("")) {
-                                    final String finalNext = next;
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            txtMessage.setText(finalNext);
-                                        }
-                                    });
-                                }
-
-                                if (next.equals(SYNC_MESSAGE) && samples != null && !samples.isEmpty()) {
-                                    Timber.i("Calculating start time...");
-                                    // go through samples and calculate start time
-                                    Map<Character, Integer> reductionValue = new HashMap<>();
-                                    char[] chars = SYNC_MESSAGE.toCharArray();
-                                    for (int i = 0; i < chars.length; i++) {
-                                        char c = chars[i];
-                                        reductionValue.put(c, i * PACKET_DURATION);
-                                    }
-
-                                    Timber.i("Reducing samples...");
-                                    for (Sample sample : samples) {
-                                        long time = sample.getTime();
-                                        int reduceBy = reductionValue.get(sample.getChar());
-                                        sample.setTime(time - reduceBy);
-                                    }
-
-                                    long low = samples.get(0).getTime();
-                                    long high = samples.get(0).getTime();
-
-                                    for (Sample sample : samples) {
-                                        if (sample.getTime() < low) {
-                                            low = sample.getTime();
-                                        }
-                                        if (sample.getTime() > high) {
-                                            high = sample.getTime();
-                                        }
-                                    }
-                                    Timber.i("High: " + high);
-                                    Timber.i("Low: " + low);
-                                    Timber.i("High - Low: " + (high - low));
-
-                                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                        CameraManager camera = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-
-                                        try {
-                                            String[] cameraIds = camera.getCameraIdList();
-                                            ArrayList<String> flashIds = new ArrayList<>();
-                                            for (String cameraId : cameraIds) {
-                                                CameraCharacteristics characteristics = camera.getCameraCharacteristics(cameraId);
-                                                Boolean flashAvailable = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
-                                                if (flashAvailable != null && flashAvailable) {
-                                                    flashIds.add(cameraId);
-                                                }
-                                            }
-
-                                            for (String id : flashIds) {
-                                                camera.setTorchMode(id, true);
-                                            }
-
-                                        } catch (CameraAccessException e) {
-                                            e.printStackTrace();
-                                            //TODO error you need to close camera app
-                                        }
-                                    } else {
-                                        //TODO pre-lollipop flash
-                                    }
-
-                                    samples.clear();
-                                }
-
-                            } else {
-                                Timber.i("Rejected, uneven");
-                            }
-                        }
-                    }
-
-                    long avgsTime = System.currentTimeMillis();
-
-                    if (GRAPH_ENABLED) {
-                        BarFormatter bf = new BarFormatter(Color.CYAN, Color.CYAN);
-                        XYSeries series = new SimpleXYSeries(Arrays.asList(freqAvgs), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Frequencies");
-                        plot.clear();
-                        plot.addSeries(series, bf);
-                        plot.redraw();
-                    }
-
-
-                    long drawTime = System.currentTimeMillis();
-
-                    Long[] ts = {
-                            fftTime - start,
-                            avgsTime - fftTime,
-                            drawTime - avgsTime
-                    };
-                    timings.add(ts);
-
-                    while (timings.size() > 50) {
-                        timings.poll();
-                    }
-
-                    if (iterations % 100 == 0) {
-                        long avgFft = 0;
-                        long avgAvg = 0;
-                        long avgDraw = 0;
-                        for (Long[] timeFrame : timings) {
-                            avgFft += timeFrame[0];
-                            avgAvg += timeFrame[1];
-                            avgDraw += timeFrame[2];
-                        }
-                        avgFft /= timings.size();
-                        avgAvg /= timings.size();
-                        avgDraw /= timings.size();
-                        String s = String.format("FFT: %s\nBuffer: %s\nGraph: %s",
-                                avgFft,
-                                avgAvg,
-                                avgDraw);
-                        Timber.i(s);
-
-                    }
-                }
+            int low = lowBucket + (int) ((i * (BINARY_FREQ_INCREMENT * 2)) / BUCKET_SIZE);
+            int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
+            double l = freqAvgs[low];
+            double h = freqAvgs[high];
+            // avgFreqDiff / 6
+            if (freqAvgs[low] - freqAvgs[high] >= freqAvgs[high]) {
+                binData += "0";
+            } else if (freqAvgs[high] - freqAvgs[low] >= freqAvgs[low]) {
+                binData += "1";
             }
-        });
-        recordingThread.start();
+        }
+
+        if (binData.length() == BITS_PER_PACKET) {
+//                            Timber.i(binData);
+            char[] charArray = binData.toCharArray();
+            //determine if byte even (to verify data integrity)
+            int total = 0;
+            for (int i = 0; i < charArray.length; i++) {
+                char c = charArray[i];
+                int bit = Integer.parseInt(String.valueOf(c));
+                total += bit;
+            }
+            boolean even = false;
+            if (total % 2 == 0) {
+                even = true;
+            }
+            if (even) {
+                // data is good
+                String packet = "";
+                for (int i = 0; i < BYTES_PER_PACKET; i++) {
+                    String subData = binData.substring(i * 8, (i + 1) * 8);
+                    int charCode = Integer.parseInt(subData, 2);
+                    char c = (char) charCode;
+                    packet += c;
+                    samples.add(new Sample(c, System.currentTimeMillis()));
+                }
+//                                Timber.i(packet);
+                String prev = text.get();
+                String next = "";
+                if (prev.length() == 0) {
+                    next = packet;
+                } else if (!prev.endsWith(packet)) {
+                    next = prev + packet;
+                }
+                if (!next.equals("")) {
+                    return next;
+                }else{
+                    return prev;
+                }
+            } else {
+                Timber.i("Rejected, uneven");
+            }
+        }
+        return null;
+    }
+
+    private void calculateStartTime(){
+        Timber.i("Calculating start time...");
+        // go through samples and calculate start time
+        Map<Character, Integer> reductionValue = new HashMap<>();
+        char[] chars = SYNC_MESSAGE.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            char c = chars[i];
+            reductionValue.put(c, i * PACKET_DURATION);
+        }
+
+        Timber.i("Reducing samples...");
+        for (Sample sample : samples) {
+            long time = sample.getTime();
+            int reduceBy = reductionValue.get(sample.getChar());
+            sample.setTime(time - reduceBy);
+        }
+
+        long low = samples.get(0).getTime();
+        long high = samples.get(0).getTime();
+
+        for (Sample sample : samples) {
+            if (sample.getTime() < low) {
+                low = sample.getTime();
+            }
+            if (sample.getTime() > high) {
+                high = sample.getTime();
+            }
+        }
+        Timber.i("High: " + high);
+        Timber.i("Low: " + low);
+        Timber.i("High - Low: " + (high - low));
+
+        samples.clear();
+    }
+
+    private void timing(long start, long fftTime, long avgsTime, long drawTime){
+        Long[] ts = {
+                fftTime - start,
+                avgsTime - fftTime,
+                drawTime - avgsTime
+        };
+        timings.add(ts);
+
+        while (timings.size() > 50) {
+            timings.poll();
+        }
+
+        if (iterations % 20 == 0) {
+            long avgFft = 0;
+            long avgAvg = 0;
+            long avgDraw = 0;
+            for (Long[] timeFrame : timings) {
+                avgFft += timeFrame[0];
+                avgAvg += timeFrame[1];
+                avgDraw += timeFrame[2];
+            }
+            avgFft /= timings.size();
+            avgAvg /= timings.size();
+            avgDraw /= timings.size();
+
+            timing.setAvgFft(avgFft);
+            timing.setAvgAvg(avgAvg);
+            timing.setAvgDraw(avgDraw);
+        }
     }
 
     @Override

@@ -1,30 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:orientation="vertical"
-    android:background="@color/ap_black"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout>
+    <data>
+        <variable name="time" type="io.caleballen.audiojam.util.Timing" />
+        <variable name="activity" type="io.caleballen.audiojam.MainActivity" />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_main"
+        android:orientation="vertical"
+        android:background="@color/ap_black"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-    tools:context="io.caleballen.audiojam.MainActivity">
+        tools:context="io.caleballen.audiojam.MainActivity">
 
-    <TextView
-        android:id="@+id/txt_message"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/ap_white"
-        android:text="" />
+        <TextView
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ap_white"
+            android:text="@{time.avgFft}" />
+        <TextView
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ap_white"
+            android:text="@{time.avgAvg}" />
+        <TextView
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ap_white"
+            android:text="@{time.avgDraw}" />
 
-    <com.androidplot.xy.XYPlot
-        style="@style/APDefacto.Dark"
-        android:id="@+id/plot"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        tools:title="Audio"
-        tools:rangeTitle="range"
-        tools:domainTitle="domain"
-        tools:lineLabels="left|bottom"
-        tools:lineLabelRotationBottom="-45"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/txt_message"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ap_white"
+            android:onClick="@{() -> activity.clearText()}"
+            android:text="@{activity.text}" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:onClick="@{() -> activity.setGraphEnabled(!activity.graphEnabled)}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.androidplot.xy.XYPlot
+                style="@style/APDefacto.Dark"
+                android:id="@+id/plot"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                tools:title="Audio"
+                tools:rangeTitle="range"
+                tools:domainTitle="domain"
+                tools:lineLabels="left|bottom"
+                tools:lineLabelRotationBottom="-45"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
