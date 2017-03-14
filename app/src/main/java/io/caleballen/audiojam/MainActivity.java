@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
                 SAMPLERATE, CHANNELS, AUDIO_ENCODING, bufferSize);
 
-        Timber.d("Buffer Size: " + bufferSize);
+        Timber.i("Buffer Size: " + bufferSize);
         recorder.startRecording();
         recording = true;
 
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         if (binData.length() == BITS_PER_PACKET) {
-//                            Timber.d(binData);
+//                            Timber.i(binData);
                             char[] charArray = binData.toCharArray();
                             //determine if byte even (to verify data integrity)
                             int total = 0;
@@ -211,16 +211,16 @@ public class MainActivity extends AppCompatActivity {
                                 // data is good
                                 String packet = "";
                                 for (int i = 0; i < BYTES_PER_PACKET; i++) {
-//                                    Timber.d(i * 8 + "");
-//                                    Timber.d((i + 1) * 8 + "");
+//                                    Timber.i(i * 8 + "");
+//                                    Timber.i((i + 1) * 8 + "");
                                     String subData = binData.substring(i * 8, (i + 1) * 8);
-//                                    Timber.d(subData);
+//                                    Timber.i(subData);
                                     int charCode = Integer.parseInt(subData, 2);
                                     char c = (char) charCode;
                                     packet += c;
                                     samples.add(new Sample(c, System.currentTimeMillis()));
                                 }
-//                                Timber.d(packet);
+//                                Timber.i(packet);
                                 String prev = txtMessage.getText().toString();
                                 String next = "";
                                 if (prev.length() == 0) {
@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
                                 if (next.equals(SYNC_MESSAGE) && samples != null && !samples.isEmpty()) {
-                                    Timber.d("Calculating start time...");
+                                    Timber.i("Calculating start time...");
                                     // go through samples and calculate start time
                                     Map<Character, Integer> reductionValue = new HashMap<>();
                                     char[] chars = SYNC_MESSAGE.toCharArray();
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                                         reductionValue.put(c, i * PACKET_DURATION);
                                     }
 
-                                    Timber.d("Reducing samples...");
+                                    Timber.i("Reducing samples...");
                                     for (Sample sample : samples) {
                                         long time = sample.getTime();
                                         int reduceBy = reductionValue.get(sample.getChar());
@@ -266,9 +266,9 @@ public class MainActivity extends AppCompatActivity {
                                             high = sample.getTime();
                                         }
                                     }
-                                    Timber.d("High: " + high);
-                                    Timber.d("Low: " + low);
-                                    Timber.d("High - Low: " + (high - low));
+                                    Timber.i("High: " + high);
+                                    Timber.i("Low: " + low);
+                                    Timber.i("High - Low: " + (high - low));
 
                                     if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                         CameraManager camera = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
@@ -300,7 +300,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
                             } else {
-                                Timber.d("Rejected, uneven");
+                                Timber.i("Rejected, uneven");
                             }
                         }
                     }
@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                                 avgFft,
                                 avgAvg,
                                 avgDraw);
-                        Timber.d(s);
+                        Timber.i(s);
 
                     }
                 }
