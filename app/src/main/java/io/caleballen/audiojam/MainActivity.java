@@ -1,11 +1,16 @@
 package io.caleballen.audiojam;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -171,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                     avgAllFreqs /= freqAvgs.length;
 
 
-                    if (median > avgAllFreqs / 10) {
+                    if (true) {
 
                         String binData = "";
                         for (int i = 0; i < BITS_PER_PACKET; i++) {
@@ -264,6 +269,32 @@ public class MainActivity extends AppCompatActivity {
                                     Timber.d("High: " + high);
                                     Timber.d("Low: " + low);
                                     Timber.d("High - Low: " + (high - low));
+
+                                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                        CameraManager camera = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+
+                                        try {
+                                            String[] cameraIds = camera.getCameraIdList();
+                                            ArrayList<String> flashIds = new ArrayList<>();
+                                            for (String cameraId : cameraIds) {
+                                                CameraCharacteristics characteristics = camera.getCameraCharacteristics(cameraId);
+                                                Boolean flashAvailable = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
+                                                if (flashAvailable != null && flashAvailable) {
+                                                    flashIds.add(cameraId);
+                                                }
+                                            }
+
+                                            for (String id : flashIds) {
+                                                camera.setTorchMode(id, true);
+                                            }
+
+                                        } catch (CameraAccessException e) {
+                                            e.printStackTrace();
+                                            //TODO error you need to close camera app
+                                        }
+                                    } else {
+                                        //TODO pre-lollipop flash
+                                    }
 
                                     samples.clear();
                                 }
