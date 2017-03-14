@@ -14,6 +14,8 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int BUCKETS = 1024;
     private static final String SYNC_MESSAGE = "abcde";
     //    private static final int PACKET_DURATION = 1000; // in milliseconds
-    private static final int PACKET_DURATION = 130; // in milliseconds
+    private static final int PACKET_DURATION = 180; // in milliseconds
     private static final int LOW_FREQ = 18100;
     //width of each bucket in terms of frequency (~21.5332 Hz)
     private static final double BUCKET_SIZE = (((float) SAMPLERATE / 2) / (float) BUCKETS);
@@ -78,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
     private Timing timing;
     private List<Sample> samples;
     private long iterations = 0;
+
+    private Handler torchTimerHandler;
+    private boolean torchEnabled = false;
+    private boolean startedSequence = false;
+    private long startTime = 0;
 
     public final ObservableField<String> text = new ObservableField<>("");
 
@@ -134,8 +141,16 @@ public class MainActivity extends AppCompatActivity {
                         text.set(next);
                     }
                     if (next != null && next.equals(SYNC_MESSAGE) && samples != null && !samples.isEmpty()) {
-                        calculateStartTime();
-//                        setTorchEnabled(true);
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+                    if (!startedSequence) {
+                        startedSequence = true;
+                        startTime = calculateStartTime();
+                        scheduleNextTorch();
+                    }
+//                            }
+//                        });
                     }
                     long avgsTime = System.currentTimeMillis();
                     graphData(freqAvgs);
@@ -170,6 +185,30 @@ public class MainActivity extends AppCompatActivity {
         text.set("");
     }
 
+    private void scheduleNextTorch(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (torchTimerHandler == null) {
+                    torchTimerHandler = new Handler();
+                }
+                long currentTime = System.currentTimeMillis();
+                long increment = 250;
+                int period = (int) (((currentTime - startTime) / increment) + 1);
+                long delay = (increment * (period)) - (currentTime - startTime);
+                torchTimerHandler.postDelayed(torchRunnable, delay);
+            }
+        });
+    }
+
+    private Runnable torchRunnable = new Runnable() {
+        @Override
+        public void run() {
+            setTorchEnabled(!torchEnabled);
+            scheduleNextTorch();
+        }
+    };
+
     //--------torch--------------
     private void setTorchEnabled(boolean enabled){
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -179,7 +218,6 @@ public class MainActivity extends AppCompatActivity {
                 String[] cameraIds = camera.getCameraIdList();
                 ArrayList<String> flashIds = new ArrayList<>();
                 for (String cameraId : cameraIds) {
-                    Timber.i("Camera %s", cameraId);
                     CameraCharacteristics characteristics = camera.getCameraCharacteristics(cameraId);
                     Boolean flashAvailable = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
                     if (flashAvailable != null && flashAvailable) {
@@ -187,9 +225,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                for (String id : flashIds) {
-                    camera.setTorchMode(id, enabled);
+                if (flashIds.size() > 0) {
+                    camera.setTorchMode(flashIds.get(0), enabled);
                 }
+                torchEnabled = enabled;
 
             } catch (CameraAccessException e) {
                 e.printStackTrace();
@@ -317,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    private void calculateStartTime(){
+    private long calculateStartTime(){
         Timber.i("Calculating start time...");
         // go through samples and calculate start time
         Map<Character, Integer> reductionValue = new HashMap<>();
@@ -349,7 +388,10 @@ public class MainActivity extends AppCompatActivity {
         Timber.i("Low: " + low);
         Timber.i("High - Low: " + (high - low));
 
+        long startTime = low + (((high - PACKET_DURATION) - low) / 2);
         samples.clear();
+
+        return startTime;
     }
 
     private void timing(long start, long fftTime, long avgsTime, long drawTime){
