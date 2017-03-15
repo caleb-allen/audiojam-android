@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int BUCKETS = 1024;
     private static final String SYNC_MESSAGE = "abcde";
     //    private static final int PACKET_DURATION = 1000; // in milliseconds
-    private static final int PACKET_DURATION = 180; // in milliseconds
+    private static final int PACKET_DURATION = 300; // in milliseconds
     private static final int LOW_FREQ = 18100;
     //width of each bucket in terms of frequency (~21.5332 Hz)
     private static final double BUCKET_SIZE = (((float) SAMPLERATE / 2) / (float) BUCKETS);
@@ -193,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     torchTimerHandler = new Handler();
                 }
                 long currentTime = System.currentTimeMillis();
+                //time between turning light on and off
                 long increment = 250;
                 int period = (int) (((currentTime - startTime) / increment) + 1);
                 long delay = (increment * (period)) - (currentTime - startTime);
@@ -364,6 +365,18 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < chars.length; i++) {
             char c = chars[i];
             reductionValue.put(c, i * PACKET_DURATION);
+        }
+
+        //take out any samples that
+        int i = 0;
+        while (i < samples.size()) {
+            if (!reductionValue.containsKey(samples.get(i).getChar())) {
+                Timber.w("Removing char from samples not found in SYNC Message: %s",
+                        samples.get(i).getChar());
+                samples.remove(i);
+            }else{
+                i++;
+            }
         }
 
         Timber.i("Reducing samples...");
