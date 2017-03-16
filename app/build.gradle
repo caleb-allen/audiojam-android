@@ -39,5 +39,8 @@ dependencies {
     compile 'com.github.wendykierp:JTransforms:3.1'
     compile 'com.jakewharton.timber:timber:4.5.1'
     compile "com.androidplot:androidplot-core:1.4.1"
+    compile "com.squareup.retrofit2:converter-gson:2.2.0"
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:retrofit-mock:2.2.0'
     testCompile 'junit:junit:4.12'
 }

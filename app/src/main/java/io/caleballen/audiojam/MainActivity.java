@@ -1,25 +1,18 @@
 package io.caleballen.audiojam;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import android.graphics.Color;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 
 import com.androidplot.xy.BarFormatter;
 import com.androidplot.xy.BoundaryMode;
@@ -37,9 +30,16 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import io.caleballen.audiojam.api.ApiClient;
+import io.caleballen.audiojam.data.Show;
 import io.caleballen.audiojam.databinding.ActivityMainBinding;
+import io.caleballen.audiojam.events.IBinaryEffect;
+import io.caleballen.audiojam.events.TorchManager;
 import io.caleballen.audiojam.util.Sample;
 import io.caleballen.audiojam.util.Timing;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -82,11 +82,12 @@ public class MainActivity extends AppCompatActivity {
     private long iterations = 0;
 
     private Handler torchTimerHandler;
-    private boolean torchEnabled = false;
     private boolean startedSequence = false;
     private long startTime = 0;
 
     public final ObservableField<String> text = new ObservableField<>("");
+
+    private IBinaryEffect torch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,14 +96,11 @@ public class MainActivity extends AppCompatActivity {
         binding.setActivity(this);
         plot = (XYPlot) findViewById(R.id.plot);
 
-//        plot.setRangeBoundaries(0, 22000, BoundaryMode.GROW);
         plot.setRangeLowerBoundary(0, BoundaryMode.FIXED);
         plot.setRangeUpperBoundary(100, BoundaryMode.FIXED);
         plot.setDomainLowerBoundary(0, BoundaryMode.FIXED);
         plot.setDomainUpperBoundary(BUCKETS, BoundaryMode.FIXED);
-//        plot.setDomainUpperBoundary(300, BoundaryMode.FIXED);
 
-//        plot.setRenderMode(Plot.RenderMode.USE_BACKGROUND_THREAD);
 
         bufferFrames = new LinkedBlockingQueue<>();
         averages = new Double[BUCKETS];
@@ -126,6 +124,21 @@ public class MainActivity extends AppCompatActivity {
         timing = new Timing();
         binding.setTime(timing);
         samples = new ArrayList<>();
+
+        torch = new TorchManager(this);
+
+        ApiClient.getApiClient().getShow().enqueue(new Callback<Show>() {
+            @Override
+            public void onResponse(Call<Show> call, Response<Show> response) {
+                Timber.i(response.body().name);
+            }
+
+            @Override
+            public void onFailure(Call<Show> call, Throwable t) {
+                Timber.e(t);
+            }
+        });
+
 
         recordingThread = new Thread(new Runnable() {
             @Override
@@ -183,6 +196,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void clearText() {
         text.set("");
+        if (torchTimerHandler != null) {
+            torchTimerHandler.removeCallbacks(torchRunnable);
+        }
+        if (torch.isEnabled()) {
+            torch.setEnabled(false);
+        }
+        if (startedSequence) {
+            startedSequence = false;
+        }
     }
 
     private void scheduleNextTorch(){
@@ -205,40 +227,10 @@ public class MainActivity extends AppCompatActivity {
     private Runnable torchRunnable = new Runnable() {
         @Override
         public void run() {
-            setTorchEnabled(!torchEnabled);
+            torch.setEnabled(!torch.isEnabled());
             scheduleNextTorch();
         }
     };
-
-    //--------torch--------------
-    private void setTorchEnabled(boolean enabled){
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            CameraManager camera = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-
-            try {
-                String[] cameraIds = camera.getCameraIdList();
-                ArrayList<String> flashIds = new ArrayList<>();
-                for (String cameraId : cameraIds) {
-                    CameraCharacteristics characteristics = camera.getCameraCharacteristics(cameraId);
-                    Boolean flashAvailable = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
-                    if (flashAvailable != null && flashAvailable) {
-                        flashIds.add(cameraId);
-                    }
-                }
-
-                if (flashIds.size() > 0) {
-                    camera.setTorchMode(flashIds.get(0), enabled);
-                }
-                torchEnabled = enabled;
-
-            } catch (CameraAccessException e) {
-                e.printStackTrace();
-                //TODO error you need to close camera app
-            }
-        } else {
-            //TODO pre-marshmallow flash
-        }
-    }
 
     //--------audio processing------------
 

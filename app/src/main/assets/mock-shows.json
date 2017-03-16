@@ -1,0 +1,45 @@
+{
+  "name": "Demo Show",
+  "id": "1",
+  "events":[
+    {
+      "start_time": 1000,
+      "duration": 500,
+      "effect":{
+        "flash": true
+      },
+      "peripheral": {
+        "screen":{
+          "on_color": "#00000",
+          "off_color": "#111111"
+        }
+      }
+    },
+    {
+      "start_time": 1500,
+      "duration": 500,
+      "effect":{
+        "strobe":{
+          "time_on": 50,
+          "time_off": 100
+        }
+      },
+      "peripheral":{
+        "torch": true
+      }
+    },
+    {
+      "start_time": 2000,
+      "duration": 500,
+      "effect":{
+        "fade":true
+      },
+      "peripheral":{
+        "screen": {
+          "on_color": "#00000",
+          "off_color": "#111111"
+        }
+      }
+    }
+  ]
+}

@@ -7,9 +7,18 @@ import timber.log.Timber;
  */
 
 public class Application extends android.app.Application {
+
+    public static final boolean MOCK_API = true;
+    static Application instance;
+
+    public static Application getInstance(){
+        return instance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         Timber.plant(new Timber.DebugTree());
     }
 }
