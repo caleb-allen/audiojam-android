@@ -1,7 +1,7 @@
-package io.caleballen.audiojam.api;
+package com.torchlighttech.api;
 
-import io.caleballen.audiojam.Application;
-import io.caleballen.audiojam.data.Show;
+import com.torchlighttech.Config;
+
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
@@ -23,7 +23,7 @@ public class ApiClient {
                     .build();
 
 
-            if (Application.MOCK_API) {
+            if (Config.MOCK_API) {
                 MockRetrofit mockRetrofit = new MockRetrofit.Builder(retrofit).build();
                 BehaviorDelegate<ApiInterface> delegate = mockRetrofit.create(ApiInterface.class);
                 MockApiClient mockApiClient = new MockApiClient(delegate);

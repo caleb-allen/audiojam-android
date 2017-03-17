@@ -1,6 +1,6 @@
-package io.caleballen.audiojam.scheduling;
+package com.torchlighttech.scheduling;
 
-import io.caleballen.audiojam.events.IBinaryEffect;
+import com.torchlighttech.events.IBinaryEffect;
 
 /**
  * Created by caleb on 3/15/17.

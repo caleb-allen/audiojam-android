@@ -1,6 +1,6 @@
-package io.caleballen.audiojam.api;
+package com.torchlighttech.api;
 
-import io.caleballen.audiojam.data.Show;
+import com.torchlighttech.data.Show;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

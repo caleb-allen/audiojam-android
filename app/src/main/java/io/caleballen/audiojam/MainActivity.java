@@ -30,13 +30,13 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import io.caleballen.audiojam.api.ApiClient;
-import io.caleballen.audiojam.data.Show;
+import com.torchlighttech.api.ApiClient;
+import com.torchlighttech.data.Show;
 import io.caleballen.audiojam.databinding.ActivityMainBinding;
-import io.caleballen.audiojam.events.IBinaryEffect;
-import io.caleballen.audiojam.events.TorchManager;
-import io.caleballen.audiojam.util.Sample;
-import io.caleballen.audiojam.util.Timing;
+import com.torchlighttech.events.IBinaryEffect;
+import com.torchlighttech.events.TorchManager;
+import com.torchlighttech.util.Sample;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

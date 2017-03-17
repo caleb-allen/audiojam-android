@@ -1,4 +1,4 @@
-package io.caleballen.audiojam.events;
+package com.torchlighttech.events;
 
 import android.content.Context;
 import android.hardware.camera2.CameraAccessException;

@@ -1,4 +1,4 @@
-package io.caleballen.audiojam.util;
+package io.caleballen.audiojam;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

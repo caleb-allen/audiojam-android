@@ -8,7 +8,6 @@ import timber.log.Timber;
 
 public class Application extends android.app.Application {
 
-    public static final boolean MOCK_API = true;
     static Application instance;
 
     public static Application getInstance(){
