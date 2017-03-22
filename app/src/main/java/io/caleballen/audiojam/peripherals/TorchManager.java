@@ -1,10 +1,12 @@
-package com.torchlighttech.events;
+package io.caleballen.audiojam.peripherals;
 
 import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
+
+import com.torchlighttech.events.IBinaryEffect;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,5 @@
 package com.torchlighttech.api;
 
-import android.content.Context;
-
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -35,14 +33,14 @@ public class MockApiClient implements ApiInterface {
         return sb.toString();
     }
 
-    public static String getStringFromFile(Context context, String filePath) throws Exception {
+/*    public static String getStringFromFile(Context context, String filePath) throws Exception {
         final InputStream stream = context.getResources().getAssets().open(filePath);
 
         String ret = convertStreamToString(stream);
         //Make sure you close all streams.
         stream.close();
         return ret;
-    }
+    }*/
 
     @Override
     public Call<Show> getShow() {

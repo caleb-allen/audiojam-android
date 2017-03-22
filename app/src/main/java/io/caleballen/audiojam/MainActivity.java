@@ -34,7 +34,7 @@ import com.torchlighttech.api.ApiClient;
 import com.torchlighttech.data.Show;
 import io.caleballen.audiojam.databinding.ActivityMainBinding;
 import com.torchlighttech.events.IBinaryEffect;
-import com.torchlighttech.events.TorchManager;
+import io.caleballen.audiojam.peripherals.TorchManager;
 import com.torchlighttech.util.Sample;
 
 import retrofit2.Call;
