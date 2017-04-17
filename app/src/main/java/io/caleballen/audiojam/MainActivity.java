@@ -33,7 +33,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.torchlighttech.api.ApiClient;
+import com.torchlighttech.api.TorchlightApiClient;
 import com.torchlighttech.data.Event;
 import com.torchlighttech.data.Show;
 import io.caleballen.audiojam.databinding.ActivityMainBinding;
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
         torch = new TorchManager(this);
 
-        ApiClient.getApiClient().getShow().enqueue(new Callback<Show>() {
+        ApiClient.getInstance().getShow().enqueue(new Callback<Show>() {
             @Override
             public void onResponse(Call<Show> call, Response<Show> response) {
                 Timber.i(response.body().name);

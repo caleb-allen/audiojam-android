@@ -9,7 +9,7 @@ import timber.log.Timber;
 public class Application extends android.app.Application {
 
     static Application instance;
-
+    public static final boolean DEBUG = true;
     public static Application getInstance(){
         return instance;
     }
