@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import com.torchlighttech.data.Show;
+import com.torchlighttech.data.gson.SGson;
+
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
 
@@ -44,16 +46,16 @@ public class MockApiClient implements ApiInterface {
 
     @Override
     public Call<Show> getShow() {
-        Gson gson = new Gson();
+        Gson gson = SGson.getInstance();
         String s = "{\n" +
                 "  \"name\": \"Demo Show\",\n" +
                 "  \"id\": \"1\",\n" +
                 "  \"events\":[\n" +
                 "    {\n" +
-                "      \"start_time\": 1000,\n" +
-                "      \"duration\": 500,\n" +
+                "      \"start_time\": 5000,\n" +
                 "      \"effect\":{\n" +
-                "        \"flash\": true\n" +
+                "        \"duration\": 2000,\n" +
+                "        \"type\": \"flash\"\n" +
                 "      },\n" +
                 "      \"peripheral\": {\n" +
                 "        \"screen\":{\n" +
@@ -63,23 +65,39 @@ public class MockApiClient implements ApiInterface {
                 "      }\n" +
                 "    },\n" +
                 "    {\n" +
-                "      \"start_time\": 1500,\n" +
-                "      \"duration\": 500,\n" +
+                "      \"start_time\": 8000,\n" +
                 "      \"effect\":{\n" +
-                "        \"strobe\":{\n" +
-                "          \"time_on\": 50,\n" +
-                "          \"time_off\": 100\n" +
-                "        }\n" +
+                "        \"duration\": 2000,\n" +
+                "        \"type\":\"strobe\",\n" +
+                "        \"time_on\": 200,\n" +
+                "        \"time_off\": 200\n" +
                 "      },\n" +
                 "      \"peripheral\":{\n" +
                 "        \"torch\": true\n" +
                 "      }\n" +
                 "    },\n" +
                 "    {\n" +
-                "      \"start_time\": 2000,\n" +
-                "      \"duration\": 500,\n" +
+                "      \"start_time\": 11000,\n" +
                 "      \"effect\":{\n" +
-                "        \"fade\":true\n" +
+                "        \"duration\": 2000,\n" +
+                "        \"type\":\"strobe\",\n" +
+                "        \"time_on\": 500,\n" +
+                "        \"time_off\": 500\n" +
+                "      },\n" +
+                "      \"peripheral\":{\n" +
+                "        \"screen\": {\n" +
+                "          \"on_color\": \"#00000\",\n" +
+                "          \"off_color\": \"#111111\"\n" +
+                "        }\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"start_time\": 14000,\n" +
+                "      \"effect\":{\n" +
+                "        \"duration\": 3000,\n" +
+                "        \"type\":\"strobe\",\n" +
+                "        \"time_on\": 50,\n" +
+                "        \"time_off\": 50\n" +
                 "      },\n" +
                 "      \"peripheral\":{\n" +
                 "        \"screen\": {\n" +

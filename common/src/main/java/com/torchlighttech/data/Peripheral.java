@@ -14,6 +14,5 @@ public class Peripheral implements Serializable
     @SerializedName("torch")
     @Expose
     public boolean torch;
-    private final static long serialVersionUID = 6751055597618192392L;
 
 }

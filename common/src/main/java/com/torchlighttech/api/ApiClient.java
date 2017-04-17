@@ -1,9 +1,11 @@
 package com.torchlighttech.api;
 
 import com.torchlighttech.Config;
+import com.torchlighttech.data.gson.SGson;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.MockRetrofit;
@@ -20,6 +22,7 @@ public class ApiClient {
         if (client == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("http://someapi.com")
+                    .addConverterFactory(GsonConverterFactory.create(SGson.getInstance()))
                     .build();
 
 

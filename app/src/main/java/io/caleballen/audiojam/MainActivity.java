@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import com.torchlighttech.api.ApiClient;
@@ -166,7 +168,8 @@ public class MainActivity extends AppCompatActivity {
                         if (!startedSequence) {
                             startedSequence = true;
                             startTime = calculateStartTime();
-                            scheduleNextTorch();
+//                            scheduleNextTorch();
+                            scheduleNextEvent();
                         }
 //                            }
 //                        });
@@ -214,7 +217,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void scheduleNextEvent(){
-        runOnUiThread(new Runnable() {
+        Timer t = new Timer();
+        for (final Event nextEvent : show.events) {
+
+            long currentTime = System.currentTimeMillis();
+            long delay = (nextEvent.startTime - (currentTime - startTime));
+            if (delay < 0) {
+                continue;
+            }
+            //get peripheral
+            final IBinaryPeripheral peripheral = new TorchManager(MainActivity.this);
+
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    nextEvent.effect.execute(peripheral);
+                }
+            };
+            Timber.d("Delay: " + delay);
+            t.schedule(task, delay);
+        }
+
+        /*runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (!(show.events.size() > 0)) {
@@ -225,14 +249,17 @@ public class MainActivity extends AppCompatActivity {
                 long delay = (nextEvent.startTime - (currentTime - startTime));
 
                 //get peripheral
-                IBinaryPeripheral peripheral;
-                if (nextEvent.peripheral.torch) {
-                    peripheral = new TorchManager(MainActivity.this);
-                } else if (nextEvent.peripheral.screen != null) {
-                    //check other peripherals
-                }
+                IBinaryPeripheral peripheral = new TorchManager(MainActivity.this);
+
+                nextEvent.effect.execute(peripheral);
+
+//                if (nextEvent.peripheral.torch) {
+//                    peripheral = new TorchManager(MainActivity.this);
+//                } else if (nextEvent.peripheral.screen != null) {
+//                    check other peripherals
+//                }
             }
-        });
+        });*/
     }
 
     private void scheduleNextTorch(){

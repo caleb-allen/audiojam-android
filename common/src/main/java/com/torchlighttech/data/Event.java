@@ -3,6 +3,7 @@ package com.torchlighttech.data;
 
 import java.io.Serializable;
 import com.google.gson.annotations.SerializedName;
+import com.torchlighttech.data.effects.Effect;
 
 public class Event implements Serializable, Comparable<Event> {
 

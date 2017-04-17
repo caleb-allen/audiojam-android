@@ -18,15 +18,12 @@ import timber.log.Timber;
 
 public class TorchManager implements IBinaryPeripheral {
 
-//    private Context context;
     private boolean torchEnabled = false;
 
     private ArrayList<String> flashIds;
     private CameraManager camera;
 
     public TorchManager(Context context){
-//        this.context = context;
-
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             try {
 
@@ -47,7 +44,6 @@ public class TorchManager implements IBinaryPeripheral {
         } else {
             //TODO pre-marshmallow flash initialization
         }
-
     }
 
     @Override
