@@ -1,13 +1,13 @@
 package com.torchlighttech.scheduling;
 
-import com.torchlighttech.events.IBinaryEffect;
+import com.torchlighttech.events.IBinaryPeripheral;
 
 /**
  * Created by caleb on 3/15/17.
  */
 
 public class Scheduler {
-    public Scheduler(IBinaryEffect binaryEvent) {
+    public Scheduler(IBinaryPeripheral binaryEvent) {
 
     }
 }

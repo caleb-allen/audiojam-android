@@ -24,6 +24,7 @@ import org.jtransforms.fft.DoubleFFT_1D;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +32,10 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import com.torchlighttech.api.ApiClient;
+import com.torchlighttech.data.Event;
 import com.torchlighttech.data.Show;
 import io.caleballen.audiojam.databinding.ActivityMainBinding;
-import com.torchlighttech.events.IBinaryEffect;
+import com.torchlighttech.events.IBinaryPeripheral;
 import io.caleballen.audiojam.peripherals.TorchManager;
 import com.torchlighttech.util.Sample;
 
@@ -81,13 +83,15 @@ public class MainActivity extends AppCompatActivity {
     private List<Sample> samples;
     private long iterations = 0;
 
+    private Show show;
+
     private Handler torchTimerHandler;
     private boolean startedSequence = false;
     private long startTime = 0;
 
     public final ObservableField<String> text = new ObservableField<>("");
 
-    private IBinaryEffect torch;
+    private IBinaryPeripheral torch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Show> call, Response<Show> response) {
                 Timber.i(response.body().name);
+                show = response.body();
+                Collections.sort(show.events);
             }
 
             @Override
@@ -157,11 +163,11 @@ public class MainActivity extends AppCompatActivity {
 //                        runOnUiThread(new Runnable() {
 //                            @Override
 //                            public void run() {
-                    if (!startedSequence) {
-                        startedSequence = true;
-                        startTime = calculateStartTime();
-                        scheduleNextTorch();
-                    }
+                        if (!startedSequence) {
+                            startedSequence = true;
+                            startTime = calculateStartTime();
+                            scheduleNextTorch();
+                        }
 //                            }
 //                        });
                     }
@@ -205,6 +211,28 @@ public class MainActivity extends AppCompatActivity {
         if (startedSequence) {
             startedSequence = false;
         }
+    }
+
+    private void scheduleNextEvent(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (!(show.events.size() > 0)) {
+                    return;
+                }
+                Event nextEvent = show.events.remove(0);
+                long currentTime = System.currentTimeMillis();
+                long delay = (nextEvent.startTime - (currentTime - startTime));
+
+                //get peripheral
+                IBinaryPeripheral peripheral;
+                if (nextEvent.peripheral.torch) {
+                    peripheral = new TorchManager(MainActivity.this);
+                } else if (nextEvent.peripheral.screen != null) {
+                    //check other peripherals
+                }
+            }
+        });
     }
 
     private void scheduleNextTorch(){

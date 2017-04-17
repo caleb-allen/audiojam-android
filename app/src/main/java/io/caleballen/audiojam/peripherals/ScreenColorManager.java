@@ -1,10 +1,13 @@
-package com.torchlighttech.events;
+package io.caleballen.audiojam.peripherals;
+
+import com.torchlighttech.events.IBinaryPeripheral;
+import com.torchlighttech.events.IGradualPeripheral;
 
 /**
  * Created by caleb on 3/15/17.
  */
 
-public class ScreenColorManager implements IGradualEffect, IBinaryEffect {
+public class ScreenColorManager implements IGradualPeripheral, IBinaryPeripheral {
     private String colorOff;
     private String colorOn;
 

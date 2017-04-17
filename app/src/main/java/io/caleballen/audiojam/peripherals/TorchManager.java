@@ -6,7 +6,7 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
 
-import com.torchlighttech.events.IBinaryEffect;
+import com.torchlighttech.events.IBinaryPeripheral;
 
 import java.util.ArrayList;
 
@@ -16,16 +16,16 @@ import timber.log.Timber;
  * Created by caleb on 3/15/17.
  */
 
-public class TorchManager implements IBinaryEffect {
+public class TorchManager implements IBinaryPeripheral {
 
-    private Context context;
+//    private Context context;
     private boolean torchEnabled = false;
 
     private ArrayList<String> flashIds;
     private CameraManager camera;
 
     public TorchManager(Context context){
-        this.context = context;
+//        this.context = context;
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             try {
