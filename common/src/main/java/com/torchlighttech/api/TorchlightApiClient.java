@@ -19,15 +19,7 @@ public class TorchlightApiClient {
         if (client == null) {
 
             Retrofit retrofit = getRetrofit();
-
-            if (Config.MOCK_API) {
-//                MockRetrofit mockRetrofit = new MockRetrofit.Builder(retrofit).build();
-//                BehaviorDelegate<ApiInterface> delegate = mockRetrofit.create(ApiInterface.class);
-//                MockApiClient mockApiClient = new MockApiClient(delegate);
-//                client = mockApiClient;
-            }else{
-                client = retrofit.create(ApiInterface.class);
-            }
+            client = retrofit.create(ApiInterface.class);
         }
         return client;
     }

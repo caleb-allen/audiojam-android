@@ -6,7 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.google.gson.annotations.SerializedName;
-import com.torchlighttech.events.IBinaryPeripheral;
+import com.torchlighttech.data.peripherals.IBinaryPeripheral;
 
 public class Strobe extends Effect implements Serializable {
     @SerializedName("time_on")
@@ -16,7 +16,6 @@ public class Strobe extends Effect implements Serializable {
 
     private transient IBinaryPeripheral peripheral;
     private transient Timer timer;
-    private transient TimerTask task;
     private long startTime;
 
     @Override
@@ -24,8 +23,7 @@ public class Strobe extends Effect implements Serializable {
         peripheral = p;
         startTime = System.currentTimeMillis();
         timer = new Timer();
-        task = new Task();
-        timer.schedule(task, 0);
+        timer.schedule(new Task(), 0);
     }
 
     private class Task extends TimerTask{

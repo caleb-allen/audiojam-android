@@ -1,39 +1,44 @@
 package io.caleballen.audiojam.peripherals;
 
-import com.torchlighttech.events.IBinaryPeripheral;
-import com.torchlighttech.events.IGradualPeripheral;
+import android.content.Context;
+import android.databinding.ObservableField;
+
+import com.torchlighttech.data.peripherals.IBinaryPeripheral;
+import com.torchlighttech.data.peripherals.IGradualPeripheral;
+import com.torchlighttech.data.peripherals.Screen;
+
+import timber.log.Timber;
 
 /**
  * Created by caleb on 3/15/17.
  */
 
-public class ScreenColorManager implements IGradualPeripheral, IBinaryPeripheral {
+public class ScreenColorManager implements IBinaryPeripheral {
     private String colorOff;
     private String colorOn;
+    private boolean enabled = false;
+    ObservableField<String> screenColor;
 
-    public ScreenColorManager(String colorOff, String colorOn) {
-        this.colorOff = colorOff;
-        this.colorOn = colorOn;
+    public ScreenColorManager(Screen screen, ObservableField<String> screenColor) {
+        colorOff = screen.offColor;
+        colorOn = screen.onColor;
+        this.screenColor = screenColor;
     }
-
 
     @Override
     public void setEnabled(boolean enabled) {
+        Timber.d("Set" + enabled + " from ScreenColorManager");
+        if (enabled) {
+            this.screenColor.set(colorOn);
+        }else{
+            this.screenColor.set(colorOff);
+        }
 
+        this.enabled = enabled;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
-    }
-
-    @Override
-    public void setValue(int value) {
-
-    }
-
-    @Override
-    public int getValue() {
-        return 0;
+        return enabled;
     }
 }

@@ -1,63 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
+
+        <import type="android.view.View" />
         <variable name="time" type="io.caleballen.audiojam.Timing" />
         <variable name="activity" type="io.caleballen.audiojam.MainActivity" />
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_main"
-        android:orientation="vertical"
-        android:background="@color/ap_black"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
 
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         tools:context="io.caleballen.audiojam.MainActivity">
 
-        <TextView
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/ap_white"
-            android:text="@{time.avgFft}" />
-        <TextView
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/ap_white"
-            android:text="@{time.avgAvg}" />
-        <TextView
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/ap_white"
-            android:text="@{time.avgDraw}" />
 
-        <TextView
-            android:id="@+id/txt_message"
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/ap_white"
-            android:onClick="@{() -> activity.clearText()}"
-            android:text="@{activity.text}" />
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:onClick="@{() -> activity.setGraphEnabled(!activity.graphEnabled)}"
+            android:id="@+id/activity_main"
+            android:orientation="vertical"
+            android:background="@color/ap_black"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.androidplot.xy.XYPlot
-                style="@style/APDefacto.Dark"
-                android:id="@+id/plot"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                tools:title="Audio"
-                tools:rangeTitle="range"
-                tools:domainTitle="domain"
-                tools:lineLabels="left|bottom"
-                tools:lineLabelRotationBottom="-45"/>
-        </LinearLayout>
+            android:layout_height="match_parent"
+            >
 
-    </LinearLayout>
+            <TextView
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ap_white"
+                android:text="@{time.avgFft}" />
+            <TextView
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ap_white"
+                android:text="@{time.avgAvg}" />
+            <TextView
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ap_white"
+                android:text="@{time.avgDraw}" />
+
+            <TextView
+                android:id="@+id/txt_message"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ap_white"
+                android:onClick="@{() -> activity.clearText()}"
+                android:text="@{activity.text}" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:onClick="@{() -> activity.setGraphEnabled(!activity.graphEnabled)}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.androidplot.xy.XYPlot
+                    style="@style/APDefacto.Dark"
+                    android:id="@+id/plot"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    tools:title="Audio"
+                    tools:rangeTitle="range"
+                    tools:domainTitle="domain"
+                    tools:lineLabels="left|bottom"
+                    tools:lineLabelRotationBottom="-45"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <View
+            android:id="@+id/color_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="#ffffff" />
+    </RelativeLayout>
 </layout>

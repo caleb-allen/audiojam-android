@@ -9,10 +9,9 @@
         "type": "flash"
       },
       "peripheral": {
-        "screen":{
-          "on_color": "#00000",
-          "off_color": "#111111"
-        }
+        "type": "screen",
+        "on_color": "#f70404",
+        "off_color": "#ffffff"
       }
     },
     {
@@ -24,7 +23,7 @@
         "time_off": 200
       },
       "peripheral":{
-        "torch": true
+        "type": "torch"
       }
     },
     {
@@ -36,10 +35,21 @@
         "time_off": 500
       },
       "peripheral":{
-        "screen": {
-          "on_color": "#00000",
-          "off_color": "#111111"
-        }
+        "type": "screen",
+        "on_color": "#f70404",
+        "off_color": "#ffffff"
+      }
+    },
+    {
+      "start_time": 11000,
+      "effect":{
+        "duration": 2000,
+        "type":"strobe",
+        "time_on": 500,
+        "time_off": 500
+      },
+      "peripheral":{
+        "type": "torch"
       }
     },
     {
@@ -51,10 +61,21 @@
         "time_off": 50
       },
       "peripheral":{
-        "screen": {
-          "on_color": "#00000",
-          "off_color": "#111111"
-        }
+        "type": "screen",
+        "on_color": "#f70404",
+        "off_color": "#ffffff"
+      }
+    },
+    {
+      "start_time": 14000,
+      "effect":{
+        "duration": 3000,
+        "type":"strobe",
+        "time_on": 50,
+        "time_off": 50
+      },
+      "peripheral":{
+        "type": "torch"
       }
     }
   ]

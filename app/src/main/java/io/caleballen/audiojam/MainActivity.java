@@ -3,16 +3,17 @@ package io.caleballen.audiojam;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.databinding.Observable;
 import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.androidplot.xy.BarFormatter;
 import com.androidplot.xy.BoundaryMode;
@@ -33,12 +34,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.torchlighttech.api.TorchlightApiClient;
 import com.torchlighttech.data.Event;
 import com.torchlighttech.data.Show;
 import io.caleballen.audiojam.databinding.ActivityMainBinding;
-import com.torchlighttech.events.IBinaryPeripheral;
+import com.torchlighttech.data.peripherals.IBinaryPeripheral;
+
+import io.caleballen.audiojam.peripherals.ScreenColorManager;
 import io.caleballen.audiojam.peripherals.TorchManager;
+
+import com.torchlighttech.data.peripherals.Screen;
+import com.torchlighttech.data.peripherals.Torch;
 import com.torchlighttech.util.Sample;
 
 import retrofit2.Call;
@@ -76,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     private AudioRecord recorder = null;
     private boolean recording = false;
     private Thread recordingThread = null;
-    private XYPlot plot;
+
     private short buffer[] = new short[BUCKETS];
     private Queue<Double[]> bufferFrames;
     private Double[] averages;
@@ -87,13 +92,14 @@ public class MainActivity extends AppCompatActivity {
 
     private Show show;
 
-    private Handler torchTimerHandler;
+    private XYPlot plot;
+    private View colorView;
+
     private boolean startedSequence = false;
     private long startTime = 0;
 
     public final ObservableField<String> text = new ObservableField<>("");
-
-    private IBinaryPeripheral torch;
+    public final ObservableField<String> screenColor = new ObservableField<>("#ffffff");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +113,28 @@ public class MainActivity extends AppCompatActivity {
         plot.setDomainLowerBoundary(0, BoundaryMode.FIXED);
         plot.setDomainUpperBoundary(BUCKETS, BoundaryMode.FIXED);
 
+        colorView = findViewById(R.id.color_view);
+        colorView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setVisibility(View.GONE);
+            }
+        });
+
+        screenColor.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable observable, int i) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (colorView.getVisibility() == View.GONE) {
+                            colorView.setVisibility(View.VISIBLE);
+                        }
+                        colorView.setBackgroundColor(Color.parseColor(screenColor.get()));
+                    }
+                });
+            }
+        });
 
         bufferFrames = new LinkedBlockingQueue<>();
         averages = new Double[BUCKETS];
@@ -130,8 +158,6 @@ public class MainActivity extends AppCompatActivity {
         timing = new Timing();
         binding.setTime(timing);
         samples = new ArrayList<>();
-
-        torch = new TorchManager(this);
 
         ApiClient.getInstance().getShow().enqueue(new Callback<Show>() {
             @Override
@@ -162,17 +188,11 @@ public class MainActivity extends AppCompatActivity {
                         text.set(next);
                     }
                     if (next != null && next.equals(SYNC_MESSAGE) && samples != null && !samples.isEmpty()) {
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
                         if (!startedSequence) {
                             startedSequence = true;
                             startTime = calculateStartTime();
-//                            scheduleNextTorch();
                             scheduleNextEvent();
                         }
-//                            }
-//                        });
                     }
                     long avgsTime = System.currentTimeMillis();
                     graphData(freqAvgs);
@@ -205,12 +225,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void clearText() {
         text.set("");
-        if (torchTimerHandler != null) {
-            torchTimerHandler.removeCallbacks(torchRunnable);
-        }
-        if (torch.isEnabled()) {
-            torch.setEnabled(false);
-        }
         if (startedSequence) {
             startedSequence = false;
         }
@@ -225,9 +239,21 @@ public class MainActivity extends AppCompatActivity {
             if (delay < 0) {
                 continue;
             }
-            //get peripheral
-            final IBinaryPeripheral peripheral = new TorchManager(MainActivity.this);
+            IBinaryPeripheral p = null;
+//            p = nextEvent.peripheral.getClass().
+            if (nextEvent.peripheral instanceof Torch) {
+                p = new TorchManager(this);
+            }else if(nextEvent.peripheral instanceof Screen){
+                p = new ScreenColorManager((Screen) nextEvent.peripheral, screenColor);
+            }
 
+            //get peripheral
+            final IBinaryPeripheral peripheral = p;
+
+            if (p == null) {
+                Timber.e("No peripheral assigned");
+                continue;
+            }
             TimerTask task = new TimerTask() {
                 @Override
                 public void run() {
@@ -237,55 +263,7 @@ public class MainActivity extends AppCompatActivity {
             Timber.d("Delay: " + delay);
             t.schedule(task, delay);
         }
-
-        /*runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (!(show.events.size() > 0)) {
-                    return;
-                }
-                Event nextEvent = show.events.remove(0);
-                long currentTime = System.currentTimeMillis();
-                long delay = (nextEvent.startTime - (currentTime - startTime));
-
-                //get peripheral
-                IBinaryPeripheral peripheral = new TorchManager(MainActivity.this);
-
-                nextEvent.effect.execute(peripheral);
-
-//                if (nextEvent.peripheral.torch) {
-//                    peripheral = new TorchManager(MainActivity.this);
-//                } else if (nextEvent.peripheral.screen != null) {
-//                    check other peripherals
-//                }
-            }
-        });*/
     }
-
-    private void scheduleNextTorch(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (torchTimerHandler == null) {
-                    torchTimerHandler = new Handler();
-                }
-                long currentTime = System.currentTimeMillis();
-                //time between turning light on and off
-                long increment = 250;
-                int period = (int) (((currentTime - startTime) / increment) + 1);
-                long delay = (increment * (period)) - (currentTime - startTime);
-                torchTimerHandler.postDelayed(torchRunnable, delay);
-            }
-        });
-    }
-
-    private Runnable torchRunnable = new Runnable() {
-        @Override
-        public void run() {
-            torch.setEnabled(!torch.isEnabled());
-            scheduleNextTorch();
-        }
-    };
 
     //--------audio processing------------
 

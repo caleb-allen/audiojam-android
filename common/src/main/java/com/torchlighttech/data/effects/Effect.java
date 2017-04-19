@@ -1,6 +1,6 @@
 package com.torchlighttech.data.effects;
 
-import com.torchlighttech.events.IBinaryPeripheral;
+import com.torchlighttech.data.peripherals.IBinaryPeripheral;
 
 import java.io.Serializable;
 

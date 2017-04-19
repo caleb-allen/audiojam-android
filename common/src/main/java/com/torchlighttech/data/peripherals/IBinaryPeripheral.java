@@ -1,4 +1,4 @@
-package com.torchlighttech.events;
+package com.torchlighttech.data.peripherals;
 
 /**
  * Created by caleb on 3/15/17.

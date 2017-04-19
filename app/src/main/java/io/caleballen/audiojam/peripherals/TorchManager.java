@@ -6,8 +6,9 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
 
-import com.torchlighttech.events.IBinaryPeripheral;
+import com.torchlighttech.data.peripherals.IBinaryPeripheral;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import timber.log.Timber;
@@ -16,7 +17,7 @@ import timber.log.Timber;
  * Created by caleb on 3/15/17.
  */
 
-public class TorchManager implements IBinaryPeripheral {
+public class TorchManager implements IBinaryPeripheral, Serializable {
 
     private boolean torchEnabled = false;
 

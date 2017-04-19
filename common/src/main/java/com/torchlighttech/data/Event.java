@@ -4,13 +4,13 @@ package com.torchlighttech.data;
 import java.io.Serializable;
 import com.google.gson.annotations.SerializedName;
 import com.torchlighttech.data.effects.Effect;
+import com.torchlighttech.data.peripherals.Peripheral;
 
 public class Event implements Serializable, Comparable<Event> {
 
 
     @SerializedName("start_time")
     public int startTime;
-    public int duration;
     public Effect effect;
     public Peripheral peripheral;
 
