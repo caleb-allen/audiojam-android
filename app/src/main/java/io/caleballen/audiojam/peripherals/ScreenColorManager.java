@@ -27,7 +27,6 @@ public class ScreenColorManager implements IBinaryPeripheral {
 
     @Override
     public void setEnabled(boolean enabled) {
-        Timber.d("Set" + enabled + " from ScreenColorManager");
         if (enabled) {
             this.screenColor.set(colorOn);
         }else{

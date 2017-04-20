@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int SAMPLERATE = 44100;
     private static final int BUCKETS = 1024;
-    private static final String SYNC_MESSAGE = "abcde";
+//    private static final String SYNC_MESSAGE = "abcde";
     //    private static final int PACKET_DURATION = 1000; // in milliseconds
     private static final int PACKET_DURATION = 300; // in milliseconds
     private static final int LOW_FREQ = 18100;
@@ -77,11 +77,6 @@ public class MainActivity extends AppCompatActivity {
     //    private static final int SAMPLERATE = 8000;
     private static final int CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
-    public static boolean graphEnabled = false;
-    private AudioRecord recorder = null;
-    private boolean recording = false;
-    private Thread recordingThread = null;
-
     private short buffer[] = new short[BUCKETS];
     private Queue<Double[]> bufferFrames;
     private Double[] averages;
@@ -89,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
     private Timing timing;
     private List<Sample> samples;
     private long iterations = 0;
+
+    public static boolean graphEnabled = false;
+    private AudioRecord recorder = null;
+    private boolean recording = false;
+
+    private Thread recordingThread = null;
 
     private Show show;
 
@@ -187,11 +188,36 @@ public class MainActivity extends AppCompatActivity {
                     if (next != null) {
                         text.set(next);
                     }
-                    if (next != null && next.equals(SYNC_MESSAGE) && samples != null && !samples.isEmpty()) {
-                        if (!startedSequence) {
-                            startedSequence = true;
-                            startTime = calculateStartTime();
-                            scheduleNextEvent();
+                    if (next != null && samples != null && !samples.isEmpty()) {
+                        // show ID (2 chars)
+                        int index = next.lastIndexOf("ab");
+                        String showTimeStamp;
+                        String syncMessage = "";
+                        int timeStamp = 0;
+                        boolean validMessage = false;
+                        if (index >= 0) {
+                            try {
+                                showTimeStamp = next.substring(index + 2, index + 5);
+                                Timber.i("Showtimestamp: " + showTimeStamp);
+                                syncMessage = "ab" + showTimeStamp;
+                                timeStamp = Integer.parseInt(showTimeStamp, 10) * 1000;
+                                Timber.i("String to Integer Timestamp: " + showTimeStamp + " -> "
+                                + timeStamp);
+                                Timber.i("Valid message: " + syncMessage);
+                                validMessage = true;
+                            } catch (IndexOutOfBoundsException | NumberFormatException ignored) {
+                                validMessage = false;
+                            }
+                        }
+                        if (validMessage) {
+                            Timber.i(syncMessage);
+                            if (!startedSequence) {
+                                recording = false;
+                                recorder.stop();
+                                startedSequence = true;
+                                startTime = calculateStartTime(syncMessage, timeStamp);
+                                scheduleNextEvent();
+                            }
                         }
                     }
                     long avgsTime = System.currentTimeMillis();
@@ -219,12 +245,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setGraphEnabled(boolean enabled) {
-        Timber.i("Graph method");
         graphEnabled = enabled;
     }
 
     public void clearText() {
         text.set("");
+        if (samples != null) {
+            samples.clear();
+        }
         if (startedSequence) {
             startedSequence = false;
         }
@@ -235,8 +263,10 @@ public class MainActivity extends AppCompatActivity {
         for (final Event nextEvent : show.events) {
 
             long currentTime = System.currentTimeMillis();
-            long delay = (nextEvent.startTime - (currentTime - startTime));
+            long delay = (nextEvent.startTime + (currentTime - startTime));
+//            Timber.i("Delay: " + delay / 1000);
             if (delay < 0) {
+//                Timber.i("In the past, removing event");
                 continue;
             }
             IBinaryPeripheral p = null;
@@ -260,7 +290,6 @@ public class MainActivity extends AppCompatActivity {
                     nextEvent.effect.execute(peripheral);
                 }
             };
-            Timber.d("Delay: " + delay);
             t.schedule(task, delay);
         }
     }
@@ -382,15 +411,40 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    private long calculateStartTime(){
+    private long calculateStartTime(String syncMessage, int showTimeStamp){
         Timber.i("Calculating start time...");
         // go through samples and calculate start time
         Map<Character, Integer> reductionValue = new HashMap<>();
-        char[] chars = SYNC_MESSAGE.toCharArray();
+        char[] chars = syncMessage.toCharArray();
         for (int i = 0; i < chars.length; i++) {
             char c = chars[i];
             reductionValue.put(c, i * PACKET_DURATION);
         }
+
+        /*String ss = "";
+        for (Sample s : samples) {
+            ss += s.getChar();
+        }
+        Timber.i(ss);
+        Timber.i(syncMessage);
+
+        int sampleIndex = samples.size() - 1;
+        List<Sample> newSamples = new ArrayList<>();
+        for(int i = syncMessage.length() - 1; i >= 0; i--) {
+            char c = syncMessage.charAt(i);
+            //trace back from the end to start of the sync message to verify where the valid
+            //samples started
+            //e.g. if the samples are
+            // 'asdfjdkdaaaaaaabbbbcccccddddeee'
+            //and syncMessage is 'abcde'
+            //we need to trace back from the samples to find the cutoff point
+
+            while (sampleIndex >= 0 && samples.get(sampleIndex).getChar() == c) {
+                newSamples.add(0, samples.get(sampleIndex));
+                sampleIndex--;
+            }
+        }
+        samples = newSamples;*/
 
         //take out any samples that
         int i = 0;
@@ -422,12 +476,22 @@ public class MainActivity extends AppCompatActivity {
                 high = sample.getTime();
             }
         }
-        Timber.i("High: " + high);
-        Timber.i("Low: " + low);
-        Timber.i("High - Low: " + (high - low));
+//        Timber.i("High: " + high);
+//        Timber.i("Low: " + low);
+//        Timber.i("High - Low: " + (high - low));
 
         long startTime = low + (((high - PACKET_DURATION) - low) / 2);
         samples.clear();
+
+        Timber.i("Start Time: " + startTime);
+        Timber.i("showTimeStamp: " + showTimeStamp);
+
+        Timber.i("How long ago: " + (System.currentTimeMillis() - startTime) / 1000);
+//        startTime += showTimeStamp;
+        Timber.i("Both: " + startTime);
+
+        Timber.i("How long ago: " + (System.currentTimeMillis() - startTime) / 1000);
+        Timber.i("How long ago: " + (System.currentTimeMillis() - startTime));
 
         return startTime;
     }

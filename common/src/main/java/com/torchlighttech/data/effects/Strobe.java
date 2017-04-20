@@ -34,13 +34,28 @@ public class Strobe extends Effect implements Serializable {
                 peripheral.setEnabled(false);
                 return;
             }
-            if (!peripheral.isEnabled()) {
+            /*if (!peripheral.isEnabled()) {
                 peripheral.setEnabled(true);
                 timer.schedule(new Task(), timeOn);
             }else{
                 peripheral.setEnabled(false);
                 timer.schedule(new Task(), timeOff);
+            }*/
+            if (!peripheral.isEnabled()) {
+                peripheral.setEnabled(true);
+                timer.schedule(new Task(), getDelayNextStrobe(timeOff));
+            }else{
+                peripheral.setEnabled(false);
+                timer.schedule(new Task(), getDelayNextStrobe(0));
             }
         }
+    }
+
+    public long getDelayNextStrobe(int time){
+        long currentTime = System.currentTimeMillis();
+        //time between turning light on and off
+        long increment = timeOn + timeOff;
+        int period = (int) (((currentTime - startTime) / increment) + 1);
+        return (increment * (period)) - (currentTime - startTime) - time;
     }
 }

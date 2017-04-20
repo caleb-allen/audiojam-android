@@ -1,80 +1,6134 @@
 {
+  "id": 1,
   "name": "Demo Show",
-  "id": "1",
-  "events":[
+  "events": [
     {
-      "start_time": 5000,
-      "effect":{
-        "duration": 2000,
-        "type": "flash"
+      "start_time": 1501,
+      "effect": {
+        "type": "flash",
+        "duration": 50
       },
       "peripheral": {
-        "type": "screen",
-        "on_color": "#f70404",
-        "off_color": "#ffffff"
-      }
-    },
-    {
-      "start_time": 8000,
-      "effect":{
-        "duration": 2000,
-        "type":"strobe",
-        "time_on": 200,
-        "time_off": 200
-      },
-      "peripheral":{
         "type": "torch"
       }
     },
     {
-      "start_time": 11000,
-      "effect":{
-        "duration": 2000,
-        "type":"strobe",
-        "time_on": 500,
-        "time_off": 500
+      "start_time": 1850,
+      "effect": {
+        "type": "flash",
+        "duration": 50
       },
-      "peripheral":{
-        "type": "screen",
-        "on_color": "#f70404",
-        "off_color": "#ffffff"
-      }
-    },
-    {
-      "start_time": 11000,
-      "effect":{
-        "duration": 2000,
-        "type":"strobe",
-        "time_on": 500,
-        "time_off": 500
-      },
-      "peripheral":{
+      "peripheral": {
         "type": "torch"
       }
     },
     {
-      "start_time": 14000,
-      "effect":{
-        "duration": 3000,
-        "type":"strobe",
-        "time_on": 50,
-        "time_off": 50
+      "start_time": 2199,
+      "effect": {
+        "type": "flash",
+        "duration": 50
       },
-      "peripheral":{
-        "type": "screen",
-        "on_color": "#f70404",
-        "off_color": "#ffffff"
+      "peripheral": {
+        "type": "torch"
       }
     },
     {
-      "start_time": 14000,
-      "effect":{
-        "duration": 3000,
-        "type":"strobe",
-        "time_on": 50,
-        "time_off": 50
+      "start_time": 2548,
+      "effect": {
+        "type": "flash",
+        "duration": 50
       },
-      "peripheral":{
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 2897,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 3328,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 3687,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 4045,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 4404,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 4826,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 5188,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 5550,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 5912,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 6273,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 6635,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 6997,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 7360,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 7769,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 8131,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 8494,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 8856,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 9244,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 9605,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 9967,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 10328,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 10704,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 11064,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 11424,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 11784,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 12179,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 12540,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 12900,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 13260,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 13661,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 14021,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 14382,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 14742,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 15116,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 15475,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 15835,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 16195,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 16573,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 16933,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 17292,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 17652,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 18029,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 18389,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 18749,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 19108,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 19480,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 19838,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 20195,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 20553,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 20937,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 21294,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 21651,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 22008,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 22367,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 22724,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 23080,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 23437,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 23832,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 24189,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 24546,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 24902,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 25289,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 25647,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 26005,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 26364,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 26722,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 27034,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 27393,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 27753,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 28113,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 28508,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 28869,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 29230,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 29591,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 29992,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 30355,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 30717,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 31079,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 31426,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 31788,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 32150,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 32512,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 32930,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 33292,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 33654,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 34015,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 34411,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 34773,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 35135,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 35496,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 35856,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 36209,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 36562,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 36915,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 37263,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 37614,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 37965,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 38316,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 38775,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 39128,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 39481,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 39834,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 40285,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 40639,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 40994,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 41348,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 41805,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 42171,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 42538,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 42904,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 43293,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 43659,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 44024,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 44389,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 44775,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 45140,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 45504,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 45869,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 46256,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 46619,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 46983,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 47346,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 47705,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 48067,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 48429,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 48791,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 49191,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 49552,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 49913,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 50274,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 50660,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 51022,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 51384,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 51745,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 52215,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 52581,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 52948,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 53314,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 53693,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 54061,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 54429,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 54797,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 55205,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 55573,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 55941,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 56309,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 56702,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 57068,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 57435,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 57801,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 58156,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 58522,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 58889,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 59255,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 59708,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 60074,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 60441,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 60807,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 61189,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 61555,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 61921,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 62287,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 62673,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 63037,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 63402,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 63767,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 64163,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 64527,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 64891,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 65255,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 65652,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 66016,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 66381,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 66745,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 67145,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 67510,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 67875,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 68241,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 68637,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 69002,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 69368,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 69734,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 70108,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 70471,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 70835,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 71199,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 71699,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 72062,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 72426,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 72789,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 73144,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 73505,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 73865,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 74226,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 74662,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 75024,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 75386,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 75748,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 76043,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 76405,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 76768,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 77131,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 77529,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 77897,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 78265,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 78633,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 79050,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 79418,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 79785,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 80152,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 80688,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 81055,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 81423,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 81799,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 82166,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 82533,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 82901,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 83282,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 83647,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 84012,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 84377,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 84760,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 85124,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 85487,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 85851,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 86253,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 86616,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 86980,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 87343,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 87726,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 88089,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 88452,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 88816,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 89206,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 89569,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 89931,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 90294,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 90684,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 91046,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 91408,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 91770,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 92151,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 92512,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 92874,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 93235,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 93596,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 93861,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 94222,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 94582,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 94942,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 95300,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 95660,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 96020,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 96380,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 96788,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 97148,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 97508,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 97868,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 98246,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 98607,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 98967,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 99327,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 99733,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 100093,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 100454,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 100814,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 101220,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 101581,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 101941,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 102302,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 102693,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 103054,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 103416,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 103777,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 104163,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 104523,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 104884,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 105244,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 105626,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 105986,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 106347,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 106707,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 107095,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 107455,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 107815,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 108175,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 108555,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 108914,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 109274,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 109634,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 110041,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 110401,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 110761,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 111121,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 111493,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 111853,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 112212,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 112572,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 112955,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 113314,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 113673,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 114032,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 114392,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 114763,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 115122,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 115481,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 115841,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 116345,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 116704,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 117062,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 117432,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 117790,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 118147,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 118504,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 118862,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 119207,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 119560,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 119914,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 120268,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 120617,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 120969,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 121321,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 121673,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 122012,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 122362,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 122712,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 123062,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 123339,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 123688,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 124038,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 124387,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 124736,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 125160,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 125532,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 125904,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 126276,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 126522,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 126896,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 127270,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 127644,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 128045,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 128418,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 128791,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 129165,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 129526,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 129899,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 130273,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 130646,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 130992,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 131333,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 131674,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 132015,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 132355,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 132732,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 133109,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 133485,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 133830,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 134207,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 134584,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 134960,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 135307,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 135680,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 136053,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 136426,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 136754,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 137117,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 137480,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 137843,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 138233,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 138595,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 138958,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 139320,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 139696,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 140057,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 140418,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 140780,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 141141,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 141445,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 141808,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 142171,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 142534,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 142883,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 143241,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 143599,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 143958,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 144335,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 144693,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 145051,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 145409,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 145811,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 146171,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 146532,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 146892,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 147316,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 147677,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 148038,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 148400,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 148809,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 149172,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 149536,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 149899,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 150322,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 150687,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 151051,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 151415,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 151919,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 152283,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 152646,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 153009,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 153406,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 153769,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 154133,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 154497,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 154892,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 155255,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 155618,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 155982,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 156272,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 156636,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 157000,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 157363,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 157745,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 158108,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 158470,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 158832,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 159207,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 159570,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 159933,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 160296,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 160842,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 161206,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 161571,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 161936,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 162181,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 162544,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 162907,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 163270,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 163696,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 164060,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 164423,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 164787,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 165125,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 165487,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 165849,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 166211,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 166621,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 166983,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 167345,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 167706,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 168113,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 168475,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 168836,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 169197,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 169577,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 169939,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 170300,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 170662,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 171126,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 171488,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 171850,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 172212,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 172575,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 172937,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 173300,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 173662,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 174086,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 174448,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 174811,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 175174,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 175580,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 175945,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 176309,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 176673,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 176986,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 177352,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 177719,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 178085,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 178354,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 178718,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 179082,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 179446,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 179820,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 180183,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 180547,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 180910,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 181274,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 181583,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 181947,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 182310,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 182674,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 183211,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 183577,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 183943,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 184332,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 184699,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 185067,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 185434,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 185838,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 186206,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 186574,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 186941,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 187325,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 187693,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 188060,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 188428,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 188811,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 189178,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 189544,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 189910,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 190286,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 190650,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 191014,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 191377,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 191730,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 192094,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 192459,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 192823,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 193532,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 193897,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 194262,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 194626,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 195057,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 195425,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 195793,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 196197,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 196566,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 196935,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 197303,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 197692,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 198061,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 198429,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 198797,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 199193,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 199561,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 199929,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 200297,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 200685,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 201053,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 201421,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 201788,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 202167,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 202533,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 202899,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 203265,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 203601,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 203964,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 204327,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 204690,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 205053,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 205598,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 205959,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 206321,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 206671,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 207033,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 207395,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 207757,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 208098,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 208462,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 208826,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 209190,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 209599,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 209964,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 210330,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 210696,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 211216,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 211584,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 211953,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 212322,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 212590,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 212956,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 213322,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 213688,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 214059,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 214424,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 214789,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 215154,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 215505,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 215867,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 216230,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 216593,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 217032,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 217394,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 217756,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 218118,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 218468,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 218829,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 219190,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 219551,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 219913,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 220436,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 220803,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 221171,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 221526,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 221894,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 222261,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 222628,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 223074,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 223441,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 223807,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 224174,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 224527,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 224892,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 225257,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 225622,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 226147,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 226510,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 226873,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 227236,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 227588,
+      "effect": {
+        "type": "flash",
+        "duration": 50
+      },
+      "peripheral": {
         "type": "torch"
       }
     }

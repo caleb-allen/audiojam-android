@@ -1,0 +1,82 @@
+{
+  "name": "Demo Show",
+  "id": "1",
+  "events":[
+    {
+      "start_time": 5000,
+      "effect":{
+        "duration": 2000,
+        "type": "flash"
+      },
+      "peripheral": {
+        "type": "screen",
+        "on_color": "#f70404",
+        "off_color": "#ffffff"
+      }
+    },
+    {
+      "start_time": 8000,
+      "effect":{
+        "duration": 2000,
+        "type":"strobe",
+        "time_on": 200,
+        "time_off": 200
+      },
+      "peripheral":{
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 11000,
+      "effect":{
+        "duration": 2000,
+        "type":"strobe",
+        "time_on": 500,
+        "time_off": 500
+      },
+      "peripheral":{
+        "type": "screen",
+        "on_color": "#f70404",
+        "off_color": "#ffffff"
+      }
+    },
+    {
+      "start_time": 11000,
+      "effect":{
+        "duration": 2000,
+        "type":"strobe",
+        "time_on": 500,
+        "time_off": 500
+      },
+      "peripheral":{
+        "type": "torch"
+      }
+    },
+    {
+      "start_time": 14000,
+      "effect":{
+        "duration": 3000,
+        "type":"strobe",
+        "time_on": 50,
+        "time_off": 50
+      },
+      "peripheral":{
+        "type": "screen",
+        "on_color": "#f70404",
+        "off_color": "#ffffff"
+      }
+    },
+    {
+      "start_time": 14000,
+      "effect":{
+        "duration": 3000,
+        "type":"strobe",
+        "time_on": 50,
+        "time_off": 50
+      },
+      "peripheral":{
+        "type": "torch"
+      }
+    }
+  ]
+}
