@@ -263,10 +263,10 @@ public class MainActivity extends AppCompatActivity {
         for (final Event nextEvent : show.events) {
 
             long currentTime = System.currentTimeMillis();
-            long delay = (nextEvent.startTime + (currentTime - startTime));
+            long delay = (nextEvent.startTime - (currentTime - startTime));
 //            Timber.i("Delay: " + delay / 1000);
             if (delay < 0) {
-//                Timber.i("In the past, removing event");
+                Timber.i(delay + " in the past, removing event");
                 continue;
             }
             IBinaryPeripheral p = null;
@@ -421,7 +421,7 @@ public class MainActivity extends AppCompatActivity {
             reductionValue.put(c, i * PACKET_DURATION);
         }
 
-        /*String ss = "";
+        String ss = "";
         for (Sample s : samples) {
             ss += s.getChar();
         }
@@ -444,9 +444,9 @@ public class MainActivity extends AppCompatActivity {
                 sampleIndex--;
             }
         }
-        samples = newSamples;*/
+        samples = newSamples;
 
-        //take out any samples that
+        /*//take out any samples that
         int i = 0;
         while (i < samples.size()) {
             if (!reductionValue.containsKey(samples.get(i).getChar())) {
@@ -456,7 +456,7 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 i++;
             }
-        }
+        }*/
 
         Timber.i("Reducing samples...");
         for (Sample sample : samples) {
@@ -487,7 +487,7 @@ public class MainActivity extends AppCompatActivity {
         Timber.i("showTimeStamp: " + showTimeStamp);
 
         Timber.i("How long ago: " + (System.currentTimeMillis() - startTime) / 1000);
-//        startTime += showTimeStamp;
+        startTime -= showTimeStamp;
         Timber.i("Both: " + startTime);
 
         Timber.i("How long ago: " + (System.currentTimeMillis() - startTime) / 1000);
