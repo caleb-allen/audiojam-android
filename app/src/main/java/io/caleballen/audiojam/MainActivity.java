@@ -352,17 +352,36 @@ public class MainActivity extends AppCompatActivity {
 
     private String fskDemodulation(Double[] freqAvgs) {
         int lowBucket = (int) (LOW_FREQ / BUCKET_SIZE);
+        //grab high frequencies and find median
+//        Double[] upperFreqs = Arrays.copyOfRange(freqAvgs, lowBucket, freqAvgs.length - 1);
+//        Double[] sorted = upperFreqs.clone();
+//        Arrays.sort(upperFreqs);
+//        double median = (sorted[sorted.length / 2] + sorted[(sorted.length / 2) + 1]) / 2;
+
+        /*double mean = 0;
+        for (Double d : freqAvgs) {
+            avgAllFreqs += d;
+        }
+        mean /= freqAvgs.length;*/
+
+
         String binData = "";
         for (int i = 0; i < BITS_PER_PACKET; i++) {
-
+            // which frequency index is the low value?
             int low = lowBucket + (int) ((i * (BINARY_FREQ_INCREMENT * 2)) / BUCKET_SIZE);
+            // which frequency index is the high value?
             int high = low + (int) (BINARY_FREQ_INCREMENT / BUCKET_SIZE);
             double l = freqAvgs[low];
             double h = freqAvgs[high];
             // avgFreqDiff / 6
-            if (freqAvgs[low] - freqAvgs[high] >= freqAvgs[high]) {
+            /*if (l >= median && l >= h) {
                 binData += "0";
-            } else if (freqAvgs[high] - freqAvgs[low] >= freqAvgs[low]) {
+            } else if (l <= median && h >= l) {
+                binData += "1";
+            }*/
+            if (l - h >= h / 2) {
+                binData += "0";
+            } else if (h - l >= l / 2) {
                 binData += "1";
             }
         }
