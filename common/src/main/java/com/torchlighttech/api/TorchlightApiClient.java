@@ -1,12 +1,9 @@
 package com.torchlighttech.api;
 
-import com.torchlighttech.Config;
 import com.torchlighttech.data.gson.SGson;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.mock.BehaviorDelegate;
-import retrofit2.mock.MockRetrofit;
 
 /**
  * Created by caleb on 3/15/17.
