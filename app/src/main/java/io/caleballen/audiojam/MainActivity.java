@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.androidplot.xy.BarFormatter;
@@ -46,9 +47,9 @@ import com.torchlighttech.data.peripherals.Screen;
 import com.torchlighttech.data.peripherals.Torch;
 import com.torchlighttech.util.Sample;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -160,20 +161,18 @@ public class MainActivity extends AppCompatActivity {
         binding.setTime(timing);
         samples = new ArrayList<>();
 
-        ApiClient.getInstance().getShow().enqueue(new Callback<Show>() {
+        ApiClient.getInstance().getShow(new Callback<Show>() {
             @Override
-            public void onResponse(Call<Show> call, Response<Show> response) {
-                Timber.i(response.body().name);
-                show = response.body();
+            public void success(Show s, Response response) {
+                show = s;
                 Collections.sort(show.events);
             }
 
             @Override
-            public void onFailure(Call<Show> call, Throwable t) {
-                Timber.e(t);
+            public void failure(RetrofitError error) {
+                Timber.e(error);
             }
         });
-
 
         recordingThread = new Thread(new Runnable() {
             @Override
