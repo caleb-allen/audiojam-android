@@ -4,11 +4,11 @@
 BUILD_DIR = objc_build
 SOURCE_DIR = src/main/java
 # JAR_NAMES = :$(LIBS)gson-2.8.0.jar
-LIBS = libs/
-JAR_NAMES = :$(LIBS)converter-gson-2.2.0.jar:$(LIBS)gson-2.8.0.jar:$(LIBS)okhttp-3.7.0.jar:$(LIBS)retrofit-2.2.0.jar:$(LIBS)retrofit-mock-2.2.0.jar
+LIBS = source_libs/
+JAR_NAMES = :$(LIBS)gson-2.8.0.jar:$(LIBS)retrofit-1.9.0.jar:$(LIBS)rxjava-1.3.0.jar
 
 # Change to where distribution was unzipped.
-J2OBJC_DISTRIBUTION = /Users/caleb/Android/j2objc-dist
+J2OBJC_DISTRIBUTION = /Users/caleb/Android/j2objc-2.0
 J2OBJC = $(J2OBJC_DISTRIBUTION)/j2objc
 J2OBJCC = $(J2OBJC_DISTRIBUTION)/j2objcc
 
@@ -39,11 +39,12 @@ translate: $(BUILD_DIR) $(OBJC_SOURCES)
 
 
 $(BUILD_DIR)/%.m $(BUILD_DIR)/%.h: $(SOURCE_DIR)/%.java
-	$(J2OBJC) -sourcepath $(SOURCE_DIR)$(JAR_NAMES) -d $(BUILD_DIR) --build-closure --doc-comments -use-arc $?
+	$(J2OBJC) -sourcepath "$(SOURCE_DIR)$(JAR_NAMES)" -d $(BUILD_DIR) --build-closure -Xuse-jdt $?
+ # --doc-comments -use-arc
 # 	$(J2OBJC) -sourcepath $(SOURCE_DIR) -classpath "$(CLASS_PATH)" -d $(BUILD_DIR) --build-closure $?
 
-# $(BUILD_DIR)/%.o: $(BUILD_DIR)/%.m
-# 	$(J2OBJCC) -I$(BUILD_DIR) -c $? -o $@
+$(BUILD_DIR)/%.o: $(BUILD_DIR)/%.m
+	$(J2OBJCC) -I$(BUILD_DIR) -c $? -o $@
 
 $(BUILD_DIR):
 	@mkdir $(BUILD_DIR)
