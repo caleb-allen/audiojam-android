@@ -6,6 +6,7 @@ dependencies {
 //    compile 'com.squareup.retrofit2:retrofit:2.2.0'
 //    compile 'com.squareup.retrofit2:retrofit-mock:2.2.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.github.wendykierp:JTransforms:3.1'
 
     targetCompatibility = '1.7'
     sourceCompatibility = '1.7'

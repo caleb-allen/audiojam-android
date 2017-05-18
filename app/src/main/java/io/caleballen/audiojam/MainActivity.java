@@ -35,6 +35,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import com.torchlighttech.audio.AudioUtil;
 import com.torchlighttech.data.Event;
 import com.torchlighttech.data.Show;
 import io.caleballen.audiojam.databinding.ActivityMainBinding;
@@ -52,38 +53,13 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
+import static com.torchlighttech.audio.AudioUtil.*;
 
-    private static final int SAMPLERATE = 44100;
-    private static final int BUCKETS = 1024;
-//    private static final String SYNC_MESSAGE = "abcde";
-    //    private static final int PACKET_DURATION = 1000; // in milliseconds
-    private static final int PACKET_DURATION = 300; // in milliseconds
-    private static final int LOW_FREQ = 18100;
-    //width of each bucket in terms of frequency (~21.5332 Hz)
-    private static final double BUCKET_SIZE = (((float) SAMPLERATE / 2) / (float) BUCKETS);
-    //    private static final int LOW_FREQ = 17990;
-    //01100001
-    /**
-     * how far apart is each bit in terms of buckets?
-     * if BUCKETS is 512, this value should be 5
-     * if BUCKETS is 1024, this value should be 10
-     * etc
-     */
-    private static final int BINARY_BUCKET_DISTANCE = 10;
-    private static final int BYTES_PER_PACKET = 1;
-    private static final int BITS_PER_PACKET = (8 * BYTES_PER_PACKET) + 1;//plus checking bit
-    private static final double BINARY_FREQ_INCREMENT = BUCKET_SIZE * BINARY_BUCKET_DISTANCE;
-    private static final int FRAMES_THRESHOLD = 2;
-    //    private static final int SAMPLERATE = 8000;
+public class MainActivity extends AppCompatActivity {
     private static final int CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
-    private short buffer[] = new short[BUCKETS];
-    private Queue<Double[]> bufferFrames;
-    private Double[] averages;
     private Queue<Long[]> timings;
     private Timing timing;
-    private List<Sample> samples;
     private long iterations = 0;
 
     public static boolean graphEnabled = false;
@@ -96,9 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     private XYPlot plot;
     private View colorView;
-
     private boolean startedSequence = false;
-    private long startTime = 0;
 
     public final ObservableField<String> text = new ObservableField<>("");
     public final ObservableField<String> screenColor = new ObservableField<>("#ffffff");
@@ -138,8 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        bufferFrames = new LinkedBlockingQueue<>();
-        averages = new Double[BUCKETS];
+
         for (int i = 0; i < averages.length; i++) {
             averages[i] = 0D;
         }
@@ -159,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         timings = new LinkedBlockingQueue<>();
         timing = new Timing();
         binding.setTime(timing);
-        samples = new ArrayList<>();
+
 
         ApiClient.getInstance().getShow(new Callback<Show>() {
             @Override
@@ -180,44 +153,20 @@ public class MainActivity extends AppCompatActivity {
                 while (recording) {
                     iterations++;
                     long start = System.currentTimeMillis();
-                    double[] data = fft();
+                    short buffer[] = new short[BUCKETS];
+                    recorder.read(buffer, 0, BUCKETS);
+                    double[] data = fft(buffer);
                     long fftTime = System.currentTimeMillis();
                     Double[] freqAvgs = buffer(data);
-                    String next = fskDemodulation(freqAvgs);
+                    String next = fskDemodulation(freqAvgs, text.get());
                     if (next != null) {
                         text.set(next);
                     }
-                    if (next != null && samples != null && !samples.isEmpty()) {
-                        // show ID (2 chars)
-                        int index = next.lastIndexOf("ab");
-                        String showTimeStamp;
-                        String syncMessage = "";
-                        int timeStamp = 0;
-                        boolean validMessage = false;
-                        if (index >= 0) {
-                            try {
-                                showTimeStamp = next.substring(index + 2, index + 5);
-                                Timber.i("Showtimestamp: " + showTimeStamp);
-                                syncMessage = "ab" + showTimeStamp;
-                                timeStamp = Integer.parseInt(showTimeStamp, 10) * 1000;
-                                Timber.i("String to Integer Timestamp: " + showTimeStamp + " -> "
-                                + timeStamp);
-                                Timber.i("Valid message: " + syncMessage);
-                                validMessage = true;
-                            } catch (IndexOutOfBoundsException | NumberFormatException ignored) {
-                                validMessage = false;
-                            }
-                        }
-                        if (validMessage) {
-                            Timber.i(syncMessage);
-                            if (!startedSequence) {
-                                recording = false;
-                                recorder.stop();
-                                startedSequence = true;
-                                startTime = calculateStartTime(syncMessage, timeStamp);
-                                scheduleNextEvent();
-                            }
-                        }
+                    if (validateMessage(next)) {
+                        recording = false;
+                        recorder.stop();
+                        startedSequence = true;
+                        scheduleNextEvent();
                     }
                     long avgsTime = System.currentTimeMillis();
                     graphData(freqAvgs);
@@ -295,8 +244,7 @@ public class MainActivity extends AppCompatActivity {
 
     //--------audio processing------------
 
-    private double[] fft() {
-        recorder.read(buffer, 0, BUCKETS);
+    /*private double[] fft(short[] buffer) {
         DoubleFFT_1D fft = new DoubleFFT_1D(BUCKETS);
         double[] data = new double[buffer.length];
         for (int i = 0; i < buffer.length; i++) {
@@ -346,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
                     for (Double d : freqAvgs) {
                         avgAllFreqs += d;
                     }
-                    avgAllFreqs /= freqAvgs.length;*/
+                    avgAllFreqs /= freqAvgs.length;*//*
     }
 
     private String fskDemodulation(Double[] freqAvgs) {
@@ -357,11 +305,11 @@ public class MainActivity extends AppCompatActivity {
 //        Arrays.sort(upperFreqs);
 //        double median = (sorted[sorted.length / 2] + sorted[(sorted.length / 2) + 1]) / 2;
 
-        /*double mean = 0;
+        *//*double mean = 0;
         for (Double d : freqAvgs) {
             avgAllFreqs += d;
         }
-        mean /= freqAvgs.length;*/
+        mean /= freqAvgs.length;*//*
 
 
         String binData = "";
@@ -373,11 +321,11 @@ public class MainActivity extends AppCompatActivity {
             double l = freqAvgs[low];
             double h = freqAvgs[high];
             // avgFreqDiff / 6
-            /*if (l >= median && l >= h) {
+            *//*if (l >= median && l >= h) {
                 binData += "0";
             } else if (l <= median && h >= l) {
                 binData += "1";
-            }*/
+            }*//*
             if (l - h >= h / 2) {
                 binData += "0";
             } else if (h - l >= l / 2) {
@@ -464,17 +412,17 @@ public class MainActivity extends AppCompatActivity {
         }
         samples = newSamples;
 
-        /*//take out any samples that
-        int i = 0;
-        while (i < samples.size()) {
-            if (!reductionValue.containsKey(samples.get(i).getChar())) {
-                Timber.w("Removing char from samples not found in SYNC Message: %s",
-                        samples.get(i).getChar());
-                samples.remove(i);
-            }else{
-                i++;
-            }
-        }*/
+        //take out any samples that
+//        int i = 0;
+//        while (i < samples.size()) {
+//            if (!reductionValue.containsKey(samples.get(i).getChar())) {
+//                Timber.w("Removing char from samples not found in SYNC Message: %s",
+//                        samples.get(i).getChar());
+//                samples.remove(i);
+//            }else{
+//                i++;
+//            }
+//        }
 
         Timber.i("Reducing samples...");
         for (Sample sample : samples) {
@@ -513,6 +461,39 @@ public class MainActivity extends AppCompatActivity {
 
         return startTime;
     }
+
+    public boolean validateMessage(String next){
+        if (next != null && samples != null && !samples.isEmpty()) {
+            // show ID (2 chars)
+            int index = next.lastIndexOf("ab");
+            String showTimeStamp;
+            String syncMessage = "";
+            int timeStamp = 0;
+            boolean validMessage = false;
+            if (index >= 0) {
+                try {
+                    showTimeStamp = next.substring(index + 2, index + 5);
+                    Timber.i("Showtimestamp: " + showTimeStamp);
+                    syncMessage = "ab" + showTimeStamp;
+                    timeStamp = Integer.parseInt(showTimeStamp, 10) * 1000;
+                    Timber.i("String to Integer Timestamp: " + showTimeStamp + " -> "
+                            + timeStamp);
+                    Timber.i("Valid message: " + syncMessage);
+                    validMessage = true;
+                } catch (IndexOutOfBoundsException | NumberFormatException ignored) {
+                    validMessage = false;
+                }
+            }
+            if (validMessage) {
+                Timber.i(syncMessage);
+                if (!startedSequence) {
+                    startTime = calculateStartTime(syncMessage, timeStamp);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }*/
 
     private void timing(long start, long fftTime, long avgsTime, long drawTime){
         Long[] ts = {

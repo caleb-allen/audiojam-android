@@ -5,7 +5,7 @@ BUILD_DIR = objc_build
 SOURCE_DIR = src/main/java
 # JAR_NAMES = :$(LIBS)gson-2.8.0.jar
 LIBS = source_libs/
-JAR_NAMES = :$(LIBS)gson-2.8.0.jar:$(LIBS)retrofit-1.9.0.jar:$(LIBS)rxjava-1.3.0.jar
+JAR_NAMES = :$(LIBS)gson-2.8.0.jar:$(LIBS)retrofit-1.9.0-doppl.jar:$(LIBS)rxjava-1.3.0.jar:$(LIBS)JTransforms-3.1.jar:$(LIBS)JLargeArrays-1.6-NEW.jar:$(LIBS)commons-math3-3.5.jar
 
 # Change to where distribution was unzipped.
 J2OBJC_DISTRIBUTION = /Users/caleb/Android/j2objc-2.0
@@ -18,7 +18,7 @@ CC = $(J2OBJCC)
 #   $(BUILD_DIR)/com/torchlighttech/data/effects/Strobe.o \
 #   $(BUILD_DIR)/com/torchlighttech/data/effects/Flash.o
 # JAVA_OBJECTS = $(SOURCE_DIR)/com/torchlighttech/data/effects/Strobe.java
-# JAVA_OBJECTS = $(SOURCE_DIR)/com/torchlighttech/api/TorchlightApiClient.java
+# JAVA_OBJECTS = $(SOURCE_DIR)/com/torchlighttech/audio/AudioUtil.java
 # JAVA_OBJECTS = $(SOURCE_DIR)/com/torchlighttech/data/gson/SGson.java
 
 JAVA_OBJECTS := $(shell find $(SOURCE_DIR) -name '*.java')
