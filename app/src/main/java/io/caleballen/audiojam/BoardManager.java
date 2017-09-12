@@ -66,7 +66,7 @@ public class BoardManager implements IBinaryPeripheral{
 
     @Override
     public void setEnabled(boolean enabled) {
-        enablePin(0);
+        pins.get(0).setEnabled(!enabled);
     }
 
     @Override
