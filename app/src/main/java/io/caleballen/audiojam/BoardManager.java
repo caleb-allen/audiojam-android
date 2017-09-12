@@ -2,6 +2,7 @@ package io.caleballen.audiojam;
 
 
 import com.google.android.things.pio.PeripheralManagerService;
+import com.torchlighttech.data.peripherals.IBinaryPeripheral;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 import io.caleballen.audiojam.peripherals.Pin;
 import timber.log.Timber;
 
-public class BoardManager {
+public class BoardManager implements IBinaryPeripheral{
 
     private PeripheralManagerService service;
     private List<Pin> pins;
@@ -38,7 +39,7 @@ public class BoardManager {
 
     public void enableAllPins(boolean enabled) {
         for (Pin pin : pins) {
-            pin.setEnabled(enabled);
+            pin.setEnabled(!enabled);
         }
     }
 
@@ -61,5 +62,15 @@ public class BoardManager {
                 "BCM9",
         };
         return pins;
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        enablePin(0);
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }
