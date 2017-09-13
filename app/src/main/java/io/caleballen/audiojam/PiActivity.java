@@ -12,10 +12,6 @@ import retrofit.client.Response;
 import timber.log.Timber;
 
 public class PiActivity extends Activity {
-    private static final int INTERVAL_BETWEEN_BLINKS_MS = 100;
-
-//    private Handler mHandler = new Handler();
-//    private boolean mLedState = false;
     BoardManager boardManager;
     ShowRunner showRunner;
 //    MediaPlayer mediaPlayer;
@@ -24,7 +20,7 @@ public class PiActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Timber.d("Starting BlinkActivity");
+        Timber.d("Starting PiActivity");
         boardManager = new BoardManager();
         ApiClient.getInstance().getShow(new Callback<Show>() {
             @Override

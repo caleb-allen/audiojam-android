@@ -19,7 +19,7 @@ public class Pin implements IBinaryPeripheral{
 
     public Pin(String pinName, PeripheralManagerService managerService) throws IOException {
         gpio = managerService.openGpio(pinName);
-        gpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
+        gpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_HIGH);
     }
 
     @Override
