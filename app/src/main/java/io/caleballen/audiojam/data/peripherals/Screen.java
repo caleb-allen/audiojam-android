@@ -1,10 +1,9 @@
 
-package com.torchlighttech.data.peripherals;
+package io.caleballen.audiojam.data.peripherals;
 
 import java.io.Serializable;
 
 import com.google.gson.annotations.SerializedName;
-import com.torchlighttech.data.peripherals.Peripheral;
 
 public class Screen extends Peripheral implements Serializable {
     @SerializedName("on_color")

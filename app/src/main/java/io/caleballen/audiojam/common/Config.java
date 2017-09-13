@@ -1,4 +1,4 @@
-package com.torchlighttech;
+package io.caleballen.audiojam.common;
 
 /**
  * Created by caleb on 3/16/17.

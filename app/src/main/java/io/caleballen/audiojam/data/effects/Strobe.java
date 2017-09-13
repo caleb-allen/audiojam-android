@@ -1,12 +1,13 @@
 
-package com.torchlighttech.data.effects;
+package io.caleballen.audiojam.data.effects;
 
 import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import com.google.gson.annotations.SerializedName;
-import com.torchlighttech.data.peripherals.IBinaryPeripheral;
+import io.caleballen.audiojam.data.peripherals.IBinaryPeripheral;
+import timber.log.Timber;
 
 public class Strobe extends Effect implements Serializable {
     @SerializedName("time_on")
@@ -56,6 +57,7 @@ public class Strobe extends Effect implements Serializable {
         //time between turning light on and off
         long increment = timeOn + timeOff;
         int period = (int) (((currentTime - startTime) / increment) + 1);
-        return (increment * (period)) - (currentTime - startTime) - time;
+        long val = (increment * (period)) - (currentTime - startTime) - time;
+        return val;
     }
 }

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
-import com.torchlighttech.data.Show;
+import io.caleballen.audiojam.data.Show;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -18,7 +18,7 @@ public class PiActivity extends Activity {
 //    private boolean mLedState = false;
     BoardManager boardManager;
     ShowRunner showRunner;
-    MediaPlayer mediaPlayer;
+//    MediaPlayer mediaPlayer;
 
 
     @Override
@@ -29,15 +29,15 @@ public class PiActivity extends Activity {
         ApiClient.getInstance().getShow(new Callback<Show>() {
             @Override
             public void success(final Show show, Response response) {
-                mediaPlayer = MediaPlayer.create(PiActivity.this, R.raw.uprising);
-                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
+//                mediaPlayer = MediaPlayer.create(PiActivity.this, R.raw.uprising);
+//                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//                    @Override
+//                    public void onPrepared(MediaPlayer mp) {
                         long startTime = System.currentTimeMillis();
-                        mediaPlayer.start();
+//                        mediaPlayer.start();
                         showRunner = new ShowRunner(show, boardManager, startTime);
-                    }
-                });
+//                    }
+//                });
             }
 
             @Override
@@ -58,7 +58,7 @@ public class PiActivity extends Activity {
 //        mHandler.removeCallbacks(mBlinkRunnable);
         // Close the Gpio pin.
         boardManager.disconnectAll();
-        mediaPlayer.stop();
-        mediaPlayer.release();
+//        mediaPlayer.stop();
+//        mediaPlayer.release();
     }
 }

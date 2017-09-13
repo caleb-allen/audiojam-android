@@ -1,4 +1,4 @@
-package com.torchlighttech.data.gson;
+package io.caleballen.audiojam.data.gson;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;

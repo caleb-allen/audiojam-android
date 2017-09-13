@@ -1,4 +1,4 @@
-package com.torchlighttech.data.peripherals;
+package io.caleballen.audiojam.data.peripherals;
 
 import java.io.Serializable;
 

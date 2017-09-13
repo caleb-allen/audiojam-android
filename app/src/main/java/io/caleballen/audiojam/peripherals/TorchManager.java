@@ -6,7 +6,7 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
 
-import com.torchlighttech.data.peripherals.IBinaryPeripheral;
+import io.caleballen.audiojam.data.peripherals.IBinaryPeripheral;
 
 import java.io.Serializable;
 import java.util.ArrayList;

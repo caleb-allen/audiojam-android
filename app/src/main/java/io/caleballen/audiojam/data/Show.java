@@ -1,5 +1,5 @@
 
-package com.torchlighttech.data;
+package io.caleballen.audiojam.data;
 
 import java.io.Serializable;
 import java.util.List;

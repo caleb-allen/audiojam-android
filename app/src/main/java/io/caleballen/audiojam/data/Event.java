@@ -1,9 +1,8 @@
 
-package com.torchlighttech.data;
+package io.caleballen.audiojam.data;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
-import com.torchlighttech.data.effects.Effect;
-import com.torchlighttech.data.peripherals.Peripheral;
+import io.caleballen.audiojam.data.effects.Effect;
 
 public class Event implements Serializable, Comparable<Event> {
 
@@ -11,7 +10,7 @@ public class Event implements Serializable, Comparable<Event> {
     @SerializedName("start_time")
     public int startTime;
     public Effect effect;
-    public Peripheral peripheral;
+    public int track;
 
     /**
      * Compare start time

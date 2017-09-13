@@ -32,7 +32,7 @@ public class MockApiClient implements Client {
         switch (url) {
             case "http://bogus.com/show/":
                 try {
-                    s = getStringFromFile(Application.getInstance(), "mock-shows.json");
+                    s = getStringFromFile(Application.getInstance(), "mock-show-test.json");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

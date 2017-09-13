@@ -1,6 +1,6 @@
-package com.torchlighttech.api;
+package io.caleballen.audiojam.common;
 
-import com.torchlighttech.data.gson.SGson;
+import io.caleballen.audiojam.data.gson.SGson;
 
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;

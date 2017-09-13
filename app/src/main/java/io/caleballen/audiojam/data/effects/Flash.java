@@ -1,6 +1,6 @@
-package com.torchlighttech.data.effects;
+package io.caleballen.audiojam.data.effects;
 
-import com.torchlighttech.data.peripherals.IBinaryPeripheral;
+import io.caleballen.audiojam.data.peripherals.IBinaryPeripheral;
 
 import java.util.Timer;
 import java.util.TimerTask;

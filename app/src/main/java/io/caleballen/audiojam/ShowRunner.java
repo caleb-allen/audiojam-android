@@ -1,16 +1,12 @@
 package io.caleballen.audiojam;
 
-import com.torchlighttech.data.Event;
-import com.torchlighttech.data.Show;
-import com.torchlighttech.data.peripherals.IBinaryPeripheral;
-import com.torchlighttech.data.peripherals.Screen;
-import com.torchlighttech.data.peripherals.Torch;
+import io.caleballen.audiojam.data.Event;
+import io.caleballen.audiojam.data.Show;
+import io.caleballen.audiojam.data.peripherals.IBinaryPeripheral;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import io.caleballen.audiojam.peripherals.ScreenColorManager;
-import io.caleballen.audiojam.peripherals.TorchManager;
 import timber.log.Timber;
 
 /**
@@ -40,14 +36,14 @@ public class ShowRunner {
             }
             IBinaryPeripheral p = null;
 
-            if (nextEvent.peripheral instanceof Torch) {
-                p = boardManager;
+            if (nextEvent.track < boardManager.pinCount()) {
+                p = boardManager.getPin(nextEvent.track);
             }
             //get peripheral
             final IBinaryPeripheral peripheral = p;
 
             if (p == null) {
-                Timber.e("No peripheral assigned");
+                Timber.e("No peripheral assigned: Track " + nextEvent.track);
                 continue;
             }
             TimerTask task = new TimerTask() {
