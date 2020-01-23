@@ -55,11 +55,13 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity {
 
     private static final int SAMPLERATE = 44100;
-    private static final int BUCKETS = 1024;
+    private static final int BUCKETS = 2048;
+//    private static final int BUCKETS = 2048;
 //    private static final String SYNC_MESSAGE = "abcde";
     //    private static final int PACKET_DURATION = 1000; // in milliseconds
     private static final int PACKET_DURATION = 300; // in milliseconds
     private static final int LOW_FREQ = 18100;
+    private static final int GRAPH_LOWER_THRESHOLD = 2;
     //width of each bucket in terms of frequency (~21.5332 Hz)
     private static final double BUCKET_SIZE = (((float) SAMPLERATE / 2) / (float) BUCKETS);
     //    private static final int LOW_FREQ = 17990;
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Sample> samples;
     private long iterations = 0;
 
-    public static boolean graphEnabled = false;
+    public static boolean graphEnabled = true;
     private AudioRecord recorder = null;
     private boolean recording = false;
 
@@ -110,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
         binding.setActivity(this);
         plot = (XYPlot) findViewById(R.id.plot);
 
-        plot.setRangeLowerBoundary(0, BoundaryMode.FIXED);
-        plot.setRangeUpperBoundary(100, BoundaryMode.FIXED);
+        plot.setRangeLowerBoundary(GRAPH_LOWER_THRESHOLD, BoundaryMode.FIXED);
+        plot.setRangeUpperBoundary(11, BoundaryMode.FIXED);
         plot.setDomainLowerBoundary(0, BoundaryMode.FIXED);
-        plot.setDomainUpperBoundary(BUCKETS, BoundaryMode.FIXED);
+        plot.setDomainUpperBoundary(BUCKETS / 10, BoundaryMode.FIXED);
 
         colorView = findViewById(R.id.color_view);
         colorView.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +185,8 @@ public class MainActivity extends AppCompatActivity {
                     double[] data = fft();
                     long fftTime = System.currentTimeMillis();
                     Double[] freqAvgs = buffer(data);
-                    String next = fskDemodulation(freqAvgs);
+//                    String next = fskDemodulation(freqAvgs);
+                    String next = null; // no op
                     if (next != null) {
                         text.set(next);
                     }
@@ -306,6 +309,11 @@ public class MainActivity extends AppCompatActivity {
         return data;
     }
 
+    /**
+     *
+     * @param data
+     * @return
+     */
     private Double[] buffer(double[] data) {
         Double[] dData = new Double[data.length];
         for (int i = 0; i < data.length; i++) {
@@ -330,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
         Double[] freqAvgs = new Double[BUCKETS];
 
         for (int i = 0; i < freqAvgs.length; i++) {
-            freqAvgs[i] = averages[i] / averages.length;
+            freqAvgs[i] = Math.log(averages[i] / averages.length);
         }
 
         return freqAvgs;
